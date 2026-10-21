@@ -1,0 +1,2396 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>THE FACE — ລະບົບຄ່າມື</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" media="print" onload="this.media='all'"
+  href="https://fonts.googleapis.com/css2?family=Phetsarath:wght@400;700&family=Instrument+Serif&display=swap">
+<noscript><link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Phetsarath:wght@400;700&family=Instrument+Serif&display=swap"></noscript>
+<style>
+:root{
+  --ink:#17131C; --ink-2:#2A2430; --paper:#F7F4F0; --card:#FFFFFF;
+  --text:#1C1720; --sub:#6E655C; --muted:#9C938A;
+  --line:#E7E1D8; --line-2:#D8D0C4;
+  --brass:#9A7B4F; --brass-soft:#F0E7DA;
+  --doctor:#3B6FE0; --nurse:#22A06B; --spa:#7C5CE0;
+  --pink:#F2547D; --amber:#F7B32B; --sky:#EAF0FE; --mint:#E6F6EF;
+  --lilac:#F0ECFD; --blush:#FDECF1; --sun:#FEF5E3;
+  --red:#8E3B36; --green:#4A6B52; --amber:#8A6520;
+  --pt:env(safe-area-inset-top,0px); --pb:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;
+  font-family:'Phetsarath','Noto Sans Lao',system-ui,sans-serif}
+body{background:var(--paper);min-height:100vh;font-size:16px;color:var(--text);line-height:1.5;
+  -webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{display:none}
+.num,.serif{font-family:'Instrument Serif',Georgia,serif;font-feature-settings:'tnum';letter-spacing:.01em}
+.app{display:flex;flex-direction:column;height:100vh;height:100svh}
+
+.topbar{flex-shrink:0;background:var(--ink);color:#fff;display:flex;align-items:center;
+  padding:0 18px;padding-top:var(--pt);height:calc(62px + var(--pt));gap:12px;z-index:50}
+.topbar-logo{font-family:'Instrument Serif',Georgia,serif;font-size:19px;letter-spacing:.1em;white-space:nowrap;
+  color:#fff;padding-right:12px;border-right:1px solid rgba(255,255,255,.16);line-height:1}
+.topbar-title{font-size:15px;font-weight:400;letter-spacing:.01em}
+.topbar-sub{font-size:11.5px;color:rgba(255,255,255,.5);margin-top:1px}
+.topbar-btn{width:34px;height:34px;border-radius:8px;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8)}
+.topbar-btn:active{background:rgba(255,255,255,.16)}
+.ic{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;display:block}
+
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:18px 16px calc(28px + var(--pb))}
+.wrap{max-width:1180px;margin:0 auto;width:100%}
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:16px;align-items:start}
+.gtop{align-items:stretch}
+.gtop > .g-card{display:flex;flex-direction:column}
+.donut-wrap{display:flex;align-items:center;justify-content:center;min-height:0}
+@media(min-width:900px){.donut-wrap{flex:1}}
+.grow{align-items:stretch}
+.kpi2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.kpi3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gchips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0 4px}
+.gchip{font-size:12.5px;padding:7px 12px;border-radius:20px;background:var(--paper);
+  border:1px solid var(--line-2);color:var(--sub);display:inline-flex;align-items:center;gap:6px}
+.gchip b{font-family:'Instrument Serif',Georgia,serif;font-size:14px;font-weight:400;opacity:.65}
+.gchip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.gchip.on b{opacity:.8}
+.gk{text-align:left;cursor:pointer}
+.st-head{font-size:11.5px;font-weight:700;color:var(--muted);letter-spacing:.05em;
+  padding:16px 2px 6px;border-top:1px solid var(--line);margin-top:6px}
+.st-head:first-child{border-top:none;margin-top:0;padding-top:8px}
+.st-go{color:var(--line-2);flex-shrink:0;display:flex}
+.st-go .ic{width:17px;height:17px}
+.st-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+  padding:15px 2px;border-top:1px solid var(--line);background:none}
+.st-head + .st-row{border-top:none}
+.st-row:active{background:var(--paper)}
+.st-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.st-main{flex:1;min-width:0;display:block}
+.st-name{display:block;font-size:15.5px;font-weight:700;line-height:1.35}
+.st-sub{display:block;font-size:12px;color:var(--muted);margin-top:3px}
+.st-qty{font-family:'Instrument Serif',Georgia,serif;font-size:26px;line-height:1;
+  white-space:nowrap;flex-shrink:0}
+.st-qty small{font-size:12.5px;color:var(--sub);font-family:'Phetsarath',sans-serif;margin-left:5px}
+.kpi2 .g-card{display:flex;flex-direction:column;justify-content:center}
+.rk-grid{margin-top:8px}
+.g-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.g-hero{background:var(--doctor);border:none;color:#fff}
+.g-hero .lab{font-size:13px;opacity:.82}
+.g-hero .big{font-family:'Instrument Serif',Georgia,serif;font-size:40px;line-height:1.05;margin-top:6px}
+.g-lab{font-size:12.5px;color:var(--sub);font-weight:700}
+.g-solid{border:none;color:#fff}
+.g-solid .g-lab{color:rgba(255,255,255,.85)}
+.g-solid .g-num{color:#fff}
+.g-num{font-family:'Instrument Serif',Georgia,serif;font-size:30px;line-height:1.1;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;font-size:12px;padding:5px 11px;
+  border-radius:20px;margin-top:12px;background:rgba(255,255,255,.2);color:#fff}
+.chip.up{background:var(--mint);color:#177D52}
+.chip.down{background:var(--blush);color:#C23A5F}
+.chip.flat{background:var(--paper);color:var(--sub)}
+.g-hero .chip,.g-hero .chip.up,.g-hero .chip.down,.g-hero .chip.flat{
+  background:rgba(255,255,255,.19);color:#fff}
+.spark{display:block;width:100%;height:56px;margin-top:14px}
+.lg{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:12.5px;color:var(--sub)}
+.lg i{width:9px;height:9px;border-radius:2px;display:inline-block;margin-right:6px}
+.rk{display:block;padding:13px 0;border-top:1px solid var(--line)}
+.rk:first-of-type{border-top:none;padding-top:4px}
+.rk-top{display:flex;align-items:center;gap:10px}
+.rk-no{width:23px;height:23px;border-radius:50%;font-size:12px;font-weight:700;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;background:var(--paper);color:var(--sub)}
+.rk-no.n1{background:var(--sun);color:#8A6209}
+.rk-no.n2{background:#EFEFEF;color:#5C5C5C}
+.rk-no.n3{background:var(--blush);color:#A8455F}
+.rk-nm{flex:1;min-width:0;font-size:15.5px;font-weight:700}
+.rk-fee{font-family:'Instrument Serif',Georgia,serif;font-size:19px;white-space:nowrap}
+.rk-bar{height:8px;border-radius:4px;background:var(--paper);margin-top:9px;display:flex;overflow:hidden}
+.rk-bar span{height:8px}
+.rk-sub{font-size:12px;color:var(--muted);margin-top:6px}
+.donut{width:150px;height:150px;display:block;margin:10px auto 4px}
+@media(min-width:900px){
+  .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .c2{grid-column:span 2}
+  .c3{grid-column:span 3}
+  .donut{width:200px;height:200px;margin:18px auto 10px}
+  .g-card{padding:22px 24px}
+  .g-lab{font-size:14px}
+  .g-num{font-size:38px}
+  .g-hero .lab{font-size:14px}
+  .g-hero .big{font-size:52px}
+  .g-hero .spark{height:74px}
+  .kpi2{grid-template-columns:1fr;grid-template-rows:1fr 1fr;gap:18px;height:100%}
+  .chip{font-size:13.5px;padding:7px 14px}
+  .lg{font-size:14.5px;gap:11px}
+  .lg i{width:11px;height:11px}
+  .rk{padding:16px 0}
+  .rk-nm{font-size:17px}
+  .rk-fee{font-size:22px}
+  .rk-no{width:26px;height:26px;font-size:13px}
+  .rk-bar{height:10px;border-radius:5px}
+  .rk-bar span{height:10px}
+  .rk-sub{font-size:13px;margin-top:8px}
+  .seg-btn{font-size:14px;padding:11px 6px}
+  .sec{font-size:13.5px}
+  .bill-cust{font-size:21px}
+  .bill-total{font-size:30px}
+  .bill-meta{font-size:12.5px}
+  .ln-name{font-size:15px}
+  .ln-amt{font-size:17px}
+  .ln-qty{font-size:14px;width:38px}
+}
+.bottombar{flex-shrink:0;background:var(--card);border-top:1px solid var(--line);display:flex;
+  height:calc(62px + var(--pb));padding-bottom:var(--pb);z-index:50}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  color:var(--muted);font-size:10px;font-weight:400;position:relative;line-height:1.3;padding:0 2px;text-align:center}
+.tab .ic{width:21px;height:21px}
+.tab.on{color:var(--ink)}
+.tab.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:26px;height:2px;background:var(--brass)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:14px}
+.card-title{font-size:12.5px;font-weight:700;color:var(--sub);margin-bottom:16px;
+  letter-spacing:.03em;display:flex;align-items:center;gap:7px}
+.lbl{font-size:12.5px;color:var(--sub);font-weight:700;display:block;margin-bottom:7px}
+.field{margin-bottom:16px}
+input,select,textarea{font-family:inherit;font-size:16px;background:var(--card);color:var(--text);
+  border:1px solid var(--line-2);border-radius:8px;padding:12px 13px;width:100%;outline:none;
+  -webkit-appearance:none;transition:border-color .15s}
+input:focus,select:focus,textarea:focus{border-color:var(--brass)}
+input[type=number]{-moz-appearance:textfield}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%239C938A' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;padding-right:40px}
+textarea{resize:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;touch-action:manipulation;color:inherit}
+button:active{opacity:.7}
+button:disabled{opacity:.4;cursor:not-allowed}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.service-box{background:var(--paper);border:1px solid var(--line);padding:14px;border-radius:8px;margin-top:12px}
+.service-row{display:grid;grid-template-columns:1fr 72px 128px 42px;gap:9px;align-items:end}
+.line-sub{margin-top:8px;text-align:right;font-size:13px;color:var(--sub);min-height:18px}
+.line-sub b{font-family:'Instrument Serif',Georgia,serif;font-size:16px;color:var(--text);font-weight:400}
+.fee-wrap{display:flex}
+.fee-wrap input{border-radius:8px 0 0 8px;font-family:'Instrument Serif',Georgia,serif;font-size:17px}
+.kip{background:var(--paper);border:1px solid var(--line-2);border-left:none;padding:12px 11px;
+  border-radius:0 8px 8px 0;font-size:13px;color:var(--sub);display:flex;align-items:center}
+.remove-btn{background:var(--paper);border:1px solid var(--line-2);color:var(--red);
+  padding:11px 0;border-radius:8px;display:flex;align-items:center;justify-content:center}
+
+.btn-sticky{position:sticky;bottom:0;padding-top:10px;padding-bottom:4px;background:linear-gradient(to top,var(--paper) 62%,transparent)}
+.btn-p{width:100%;padding:15px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;
+  font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:9px;min-height:52px;
+  letter-spacing:.01em}
+.btn-o{width:100%;padding:13px;border-radius:8px;border:1px solid var(--line-2);background:var(--card);
+  color:var(--text);font-weight:400;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-add{width:100%;padding:13px;border-radius:8px;border:1px dashed var(--line-2);background:none;
+  color:var(--sub);font-size:13.5px;font-weight:400;display:flex;align-items:center;justify-content:center;
+  gap:7px;margin-top:10px}
+.btn-icon{border:1px solid var(--line-2);background:var(--card);color:var(--sub);padding:7px 10px;
+  border-radius:7px;display:flex;align-items:center}
+.btn-icon.red{color:var(--red)}
+.btn-icon.blue{color:var(--ink)}
+
+.seg{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:3px;
+  margin-bottom:14px;flex-wrap:wrap;gap:2px}
+.seg-btn{flex:1;min-width:54px;padding:9px 3px;border-radius:6px;font-size:12.5px;font-weight:400;
+  color:var(--sub);text-align:center;line-height:1.4}
+.seg-btn.on{background:var(--card);color:var(--ink);border:1px solid var(--line-2)}
+
+.tab-bar{display:flex;gap:0;margin-bottom:22px;border-bottom:1px solid var(--line)}
+.tab-btn{flex:1;padding:13px 4px;font-size:13.5px;font-weight:400;background:none;color:var(--muted);line-height:1.4;
+  border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab-btn.active-doctor{color:var(--doctor);border-bottom-color:var(--doctor)}
+.tab-btn.active-nurse{color:var(--nurse);border-bottom-color:var(--nurse)}
+.tab-btn.active-spa{color:var(--spa);border-bottom-color:var(--spa)}
+
+.banner{border-radius:8px;padding:13px 15px;font-size:13.5px;margin-bottom:14px;font-weight:400;
+  border:1px solid transparent}
+.banner.err{background:#FBF1F0;color:var(--red);border-color:#EBD8D6}
+.banner.warn{background:#FBF5E9;color:var(--amber);border-color:#EDE0C6}
+.banner.ok{background:#F1F5F1;color:var(--green);border-color:#DBE5DC}
+
+.total-strip{padding:20px 20px;border-radius:10px;display:flex;justify-content:space-between;
+  align-items:center;margin:18px 0;background:var(--ink);color:#fff}
+.total-strip .amt{font-family:'Instrument Serif',Georgia,serif;font-size:32px;line-height:1;letter-spacing:.01em}
+.total-doctor{background:var(--doctor)}
+.total-nurse{background:var(--nurse)}
+.total-spa{background:var(--spa)}
+
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(23,19,28,.55);display:flex;align-items:flex-end}
+.sheet{background:var(--card);width:100%;border-radius:16px 16px 0 0;padding:22px 18px;
+  padding-bottom:calc(26px + var(--pb));max-height:92vh;overflow-y:auto;display:flex;flex-direction:column}
+.sheet h3{font-size:17px;font-weight:400;margin-bottom:18px;letter-spacing:.01em}
+.handle{width:38px;height:4px;background:var(--line-2);border-radius:2px;margin:0 auto 18px;flex-shrink:0}
+
+.pin-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:36px 26px;gap:20px;min-height:100%;background:var(--ink)}
+.pin-wrap .mark{font-family:'Instrument Serif',Georgia,serif;font-size:30px;letter-spacing:.14em;color:#fff;text-align:center}
+.pin-wrap .sub{font-size:13px;color:rgba(255,255,255,.5);letter-spacing:.06em}
+.pin-wrap select{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18);color:#fff}
+.pin-wrap select option{color:#1C1720;background:#fff}
+.pin-rule{width:44px;height:1px;background:var(--brass)}
+.pin-dots{display:flex;gap:13px;min-height:16px}
+.pin-dot{width:9px;height:9px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+.pin-dot.f{background:var(--brass);border-color:var(--brass)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;width:100%;max-width:280px}
+.pin-key{height:60px;border-radius:9px;background:rgba(255,255,255,.06);color:#fff;
+  font-family:'Instrument Serif',Georgia,serif;font-size:25px;display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.09)}
+.pin-key:active{background:rgba(255,255,255,.16)}
+.pin-key.del{background:none;border-color:transparent;color:var(--brass);font-size:19px;font-family:inherit}
+.pin-err{color:#E0A8A3;font-size:13px;min-height:18px}
+
+.metric-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;margin-bottom:18px;
+  background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.metric-box{background:var(--card);padding:16px 14px}
+.metric-wide{grid-column:1 / -1}
+.metric-val{font-family:'Instrument Serif',Georgia,serif;font-size:24px;margin-top:5px;line-height:1.1;
+  letter-spacing:.01em}
+.metric-lbl{font-size:11.5px;color:var(--muted);font-weight:700;letter-spacing:.02em}
+
+.staff-rank{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.staff-rank-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;
+  border-bottom:1px solid var(--line)}
+.staff-rank-row:last-child{border:none}
+.staff-rank-row b{font-family:'Instrument Serif',Georgia,serif;font-size:17px;font-weight:400}
+.rank-num{width:22px;font-family:'Instrument Serif',Georgia,serif;font-size:15px;color:var(--muted);
+  flex-shrink:0;margin-right:12px}
+.bar-track{height:2px;background:var(--line);margin-top:7px;overflow:hidden}
+.bar-fill{height:2px;background:var(--brass)}
+
+.rec-item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px;margin-bottom:10px}
+.rec-item.dup{border-left:3px solid var(--amber);border-radius:0 10px 10px 0}
+.rec-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:6px}
+.rec-top .amt{font-family:'Instrument Serif',Georgia,serif;font-size:19px;white-space:nowrap;line-height:1.2}
+.rec-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px;
+  font-size:12px;color:var(--muted)}
+.badge{padding:3px 9px;border-radius:4px;font-size:11px;font-weight:400;white-space:nowrap;
+  background:var(--paper);border:1px solid var(--line);color:var(--sub)}
+.badge-blue{color:var(--doctor)}
+.badge-green{color:var(--nurse)}
+.badge-purple{color:var(--spa)}
+.badge-grey{color:var(--sub)}
+.badge-orange{color:var(--amber);background:#FBF5E9;border-color:#EDE0C6}
+
+
+.bill{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ink);
+  border-radius:0 10px 10px 0;margin-bottom:12px;overflow:hidden}
+.bill-head{display:flex;justify-content:space-between;gap:14px;padding:16px 16px 14px}
+.bill-cust{font-size:19px;font-weight:700;line-height:1.4;word-break:break-word}
+.bill-meta{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin-top:7px;
+  font-size:11.5px;color:var(--muted);letter-spacing:.01em}
+.bill-meta .dot{color:var(--line-2)}
+.bill-total{font-family:'Instrument Serif',Georgia,serif;font-size:27px;line-height:1;
+  white-space:nowrap;letter-spacing:.01em}
+.bill-total .cur{font-size:16px;color:var(--sub)}
+.bill-count{font-size:11px;color:var(--muted);margin-top:5px}
+.bill-lines{border-top:1px solid var(--line);background:var(--paper)}
+.bill-line{display:flex;align-items:center;gap:11px;padding:10px 16px;
+  border-top:1px solid rgba(0,0,0,.035)}
+.bill-line:first-child{border-top:none}
+.ln-no{font-family:'Instrument Serif',Georgia,serif;font-size:13px;color:var(--muted);
+  width:14px;flex-shrink:0;text-align:center}
+.ln-name{flex:1;min-width:0;font-size:13.5px;color:var(--text);line-height:1.5}
+.ln-qty{font-family:'Instrument Serif',Georgia,serif;font-size:14px;color:var(--muted);
+  white-space:nowrap;flex-shrink:0;width:30px;text-align:right}
+.ln-amt{font-family:'Instrument Serif',Georgia,serif;font-size:15.5px;color:var(--text);
+  white-space:nowrap;flex-shrink:0;min-width:64px;text-align:right}
+.ln-act{display:flex;gap:6px;flex-shrink:0;margin-left:2px}
+.ln-act .btn-icon{padding:6px 8px}
+.ln-act .ic{width:16px;height:16px}
+.bill-note{padding:11px 16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--sub);
+  background:var(--card)}
+.spin{width:22px;height:22px;border:2px solid var(--line-2);border-top-color:var(--brass);
+  border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
+.loading-wrap{display:flex;align-items:center;justify-content:center;padding:56px;gap:12px;
+  color:var(--muted);font-size:14px}
+.empty{text-align:center;padding:52px 20px;color:var(--muted);font-size:14px}
+.empty .ic{width:26px;height:26px;margin:0 auto 12px;stroke-width:1.2;opacity:.5}
+.sec{font-size:12px;font-weight:700;color:var(--muted);margin:22px 0 11px;letter-spacing:.04em}
+
+.update-bar{position:fixed;left:0;right:0;bottom:0;z-index:900;background:var(--ink);color:#fff;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 16px;padding-bottom:calc(14px + var(--pb));font-size:14px;
+  animation:slideUp .25s ease}
+.update-bar button{background:var(--brass);color:#fff;padding:9px 16px;border-radius:7px;
+  font-size:13.5px;font-weight:400;flex-shrink:0}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.toast{position:fixed;top:calc(62px + var(--pt) + 10px);left:16px;right:16px;z-index:999;
+  background:var(--ink);color:#fff;border-radius:9px;padding:14px 16px;font-size:14px;font-weight:400;
+  animation:slideIn .22s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+@keyframes rot{to{transform:rotate(360deg)}}
+
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;
+  background:var(--card);border-top:1px solid var(--line);gap:10px}
+.mrow:first-child{border-top:none}
+.mbox{border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px;background:var(--card)}
+.mhdr{background:var(--paper);padding:11px 16px;font-size:12.5px;font-weight:700;color:var(--sub);
+  display:flex;justify-content:space-between;letter-spacing:.03em;border-bottom:1px solid var(--line)}
+.pill{font-size:11.5px;font-weight:400;padding:6px 11px;border-radius:6px;background:var(--paper);
+  border:1px solid var(--line-2);color:var(--sub);display:inline-flex;align-items:center;gap:5px}
+.pill .ic{width:15px;height:15px}
+.pill.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.pill.off{color:var(--red);background:#FBF1F0;border-color:#EBD8D6}
+.chkgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 0}
+.chk{display:flex;align-items:center;gap:10px;font-size:14.5px;cursor:pointer;
+  border:1px solid var(--line-2);border-radius:9px;padding:13px 14px;background:var(--card);
+  -webkit-tap-highlight-color:transparent}
+.chk:active{background:var(--paper)}
+.chk input{width:21px;height:21px;accent-color:var(--brass);flex-shrink:0;margin:0}
+.chk span{flex:1}
+.chk:has(input:checked){border-color:var(--brass);background:var(--brass-soft)}
+@media(max-width:480px){.service-row{grid-template-columns:1fr 60px 108px 40px;gap:7px}}
+</style>
+</head>
+<body>
+<div id="root"><div id="boot" style="padding:64px 24px;text-align:center;font-family:sans-serif;color:#6E655C">
+  <div style="font-size:26px;letter-spacing:.2em;color:#17131C;margin-bottom:16px">THE FACE</div>
+  <p style="font-size:13px">ກຳລັງໂຫຼດ...</p></div></div>
+<script>
+window.__boot = setTimeout(function(){
+  var b = document.getElementById('boot');
+  if (b) b.innerHTML = '<div style="font-size:26px;letter-spacing:.2em;color:#17131C;margin-bottom:16px">THE FACE</div>'
+    + '<p style="font-size:14px;color:#1C1720">ໂຫຼດບໍ່ສຳເລັດ</p>'
+    + '<p style="font-size:12.5px;color:#6E655C;line-height:1.7;margin-top:10px">ກົດປຸ່ມລຸ່ມນີ້ ຫຼືລ້າງ Cache ຂອງ Browser</p>'
+    + '<button onclick="location.replace(location.pathname+\'?v=\'+Date.now())" '
+    + 'style="margin-top:18px;background:#17131C;color:#fff;border:none;padding:13px 26px;border-radius:8px;font-size:14px">ໂຫຼດໃໝ່</button>';
+}, 8000);
+
+window.addEventListener('unhandledrejection', function(e){
+  window.onerror('Promise: ' + (e.reason && e.reason.message ? e.reason.message : e.reason));
+});
+
+window.onerror = function(msg){
+  clearTimeout(window.__boot);
+  var r = document.getElementById('root');
+  if (r && !r.dataset.ok) {
+    r.innerHTML = '<div style="padding:48px 24px;text-align:center;font-family:sans-serif;color:#1C1720">'
+      + '<div style="font-size:26px;letter-spacing:.2em;margin-bottom:18px">THE FACE</div>'
+      + '<p style="font-size:15px;margin-bottom:10px">ເປີດແອັບບໍ່ໄດ້</p>'
+      + '<p style="font-size:13px;color:#6E655C;line-height:1.6">ກະລຸນາອັບເດດ Chrome ຫຼື Safari<br>ໃຫ້ເປັນລຸ້ນໃໝ່ ແລ້ວລອງອີກຄັ້ງ</p>'
+      + '<p style="font-size:11px;color:#9C938A;margin-top:22px">' + msg + '</p></div>';
+  }
+  return true;
+};
+</script>
+
+<script>
+/* ============================================================
+   ຕັ້ງຄ່າ
+   ============================================================ */
+const APP_VERSION = "20261007-1130";
+const SB_URL = "https://uexetfyrqfeeurarufwd.supabase.co";
+const SB_KEY = "sb_publishable_vjEccliIkGiMbU63XBLbgg_D6yIe61T";
+
+const BILL_TYPES = [
+  {v:'normal', t:'ບິນທົ່ວໄປ'},
+  {v:'course', t:'ຄອສ'},
+  {v:'card',   t:'ບັດຄ໋ອດ'},
+  {v:'free',   t:'ແຖມ'},
+  {v:'other',  t:'ອື່ນໆ'},
+];
+const BT = {};
+BILL_TYPES.forEach(function(b){ BT[b.v] = b.t; });
+const CFG = {
+  doctor:{label:'ໝໍ', color:'#3B6FE0', act:'active-doctor', tot:'total-doctor', badge:'badge-blue'},
+  nurse: {label:'ພະຍາບານ', color:'#22A06B', act:'active-nurse',  tot:'total-nurse',  badge:'badge-green'},
+  spa:   {label:'ສະປາ', color:'#7C5CE0', act:'active-spa',    tot:'total-spa',    badge:'badge-purple'},
+};
+
+/* ============================================================
+   ຕິດຕໍ່ຖານຂໍ້ມູນ
+   ============================================================ */
+async function api(fn, args = {}) {
+  const r = await fetch(`${SB_URL}/rest/v1/rpc/${fn}`, {
+    method: 'POST',
+    headers: {apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json'},
+    body: JSON.stringify(args)
+  });
+  const txt = await r.text();
+  if (!r.ok) {
+    if (txt.includes('AUTH')) { hardLogout(); throw new Error('AUTH'); }
+    var detail = '';
+    try {
+      var j = JSON.parse(txt);
+      detail = j.message || j.hint || j.details || j.error || '';
+      if (j.code) detail = '[' + j.code + '] ' + detail;
+    } catch (e) { detail = String(txt || '').slice(0, 200); }
+    console.error('API ' + fn + ' → ' + r.status, txt);
+    throw new Error('(' + r.status + ') ' + (detail || 'ເຊື່ອມຕໍ່ບໍ່ໄດ້'));
+  }
+  return txt ? JSON.parse(txt) : null;
+}
+
+/* ============================================================
+   ສະຖານະ
+   ============================================================ */
+const S = {
+  token: lsGet('df_token'),
+  me: null, services: [], doctors: [], today: '',
+  page: 'entry', dept: 'doctor',
+  lines: [], billType: 'normal',
+  repPeriod: 'month', repDept: 'all',
+  repMonth: '', repFrom: '', repTo: '',
+  myPeriod: 'month', myMonth: '', myFrom: '', myTo: '',
+  cache: {}, busy: false, showRep: 30, showMine: 30, stkQ: '', stkGrp: 'all'
+};
+
+
+const IC = {
+  edit:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="M14 6l4 4"/></svg>',
+  user:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>',
+  chart:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>',
+  cog:'<svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M21.5 12h-2.2M4.7 12H2.5M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6M18.7 18.7l-1.6-1.6M6.9 6.9 5.3 5.3"/></svg>',
+  exit:'<svg class="ic" viewBox="0 0 24 24"><path d="M14 20H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h8"/><path d="M17 15l3-3-3-3"/><path d="M20 12H10"/></svg>',
+  key:'<svg class="ic" viewBox="0 0 24 24"><circle cx="8" cy="12" r="3.4"/><path d="M11.4 12H21"/><path d="M18 12v3M15 12v2.2"/></svg>',
+  trash:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6.5 7l1 12h9l1-12"/></svg>',
+  plus:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>',
+  down:'<svg class="ic" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/><path d="M4 20h16"/></svg>',
+  left:'<svg class="ic" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>',
+  right:'<svg class="ic" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>',
+  save:'<svg class="ic" viewBox="0 0 24 24"><path d="M5 4h11l4 4v12H5z"/><path d="M8 4v6h7V4"/><path d="M8 20v-6h8v6"/></svg>',
+  box:'<svg class="ic" viewBox="0 0 24 24"><path d="M4 7.5 12 4l8 3.5v9L12 20l-8-3.5z"/><path d="M4 7.5 12 11l8-3.5M12 11v9"/></svg>',
+  lock:'<svg class="ic" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>',
+};
+
+function lsGet(k){ try { return localStorage.getItem(k) || ''; } catch(e){ return ''; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+function lsDel(k){ try { localStorage.removeItem(k); } catch(e){} }
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fm = n => (Number(n)||0).toLocaleString('en-US') + ' ₭';
+const myDepts = () => ['doctor','nurse','spa'].filter(d => S.me && S.me[d]);
+const isMgr    = () => S.me && S.me.role === 'manager';
+const isViewer = () => S.me && S.me.role === 'viewer';
+const canReport= () => isMgr() || isViewer();
+const hasStock = () => S.me && (S.me.stock || isMgr() || isViewer());
+
+function toast(msg, ok = true) {
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2600);
+}
+function hardLogout() {
+  lsDel('df_token');
+  S.token = ''; S.me = null; render();
+}
+
+/* ວັນທີ — ໃຊ້ເວລາທ້ອງຖິ່ນ ບໍ່ຜ່ານ UTC */
+function ymd(d) {
+  return d.getFullYear() + '-'
+       + String(d.getMonth() + 1).padStart(2, '0') + '-'
+       + String(d.getDate()).padStart(2, '0');
+}
+function periodRange(p, today) {
+  const d = new Date(today + 'T00:00:00');
+  const iso = ymd;
+  if (p === 'day')  return [today, today];
+  if (p === 'week') {
+    const wd = (d.getDay() + 6) % 7;
+    const mon = new Date(d); mon.setDate(d.getDate() - wd);
+    const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+    return [iso(mon), iso(sun)];
+  }
+  if (p === 'month') return [today.slice(0,7) + '-01', iso(new Date(d.getFullYear(), d.getMonth()+1, 0))];
+  if (p === 'year')  return [today.slice(0,4) + '-01-01', today.slice(0,4) + '-12-31'];
+  return ['2000-01-01', today];
+}
+
+/* ============================================================
+   ໜ້າເຂົ້າສູ່ລະບົບ
+   ============================================================ */
+let loginNames = [], loginPin = '', loginErr = '';
+
+async function renderLogin() {
+  $('root').innerHTML = `<div class="app"><div class="scroll" id="lg"></div></div>`;
+  $('lg').innerHTML = `<div class="loading-wrap"><div class="spin"></div><span>ກຳລັງໂຫຼດ...</span></div>`;
+  try {
+    loginNames = await api('df_login_names');
+  } catch (e) {
+    $('lg').innerHTML = `<div class="banner err">${esc(e.message)}</div>
+      <button class="btn-o" onclick="render()">ລອງໃໝ່</button>`;
+    return;
+  }
+  drawLogin();
+}
+
+function drawLogin() {
+  const sel = window._lgName || '';
+  $('lg').innerHTML = `
+    <div class="pin-wrap">
+      <div class="mark">THE FACE</div>
+      <div class="pin-rule"></div>
+      <div style="text-align:center">
+        <p class="sub">ລະບົບຄ່າມື</p>
+      </div>
+      <div style="width:100%;max-width:290px">
+        <select id="lg-name" onchange="_lgName=this.value;loginPinSet('')">
+          <option value="">— ເລືອກຊື່ —</option>
+          ${loginNames.map(n=>`<option value="${esc(n.name)}" ${n.name===sel?'selected':''}>${esc(n.name)}</option>`).join('')}
+        </select>
+      </div>
+      <div class="pin-dots">${[0,1,2,3,4,5].map(i=>`<div class="pin-dot ${loginPin.length>i?'f':''}"></div>`).join('')}</div>
+      <p class="pin-err">${esc(loginErr)}</p>
+      <div class="pin-pad">
+        ${['1','2','3','4','5','6','7','8','9','ok','0','del'].map(k=>
+          k==='ok' ? `<button class="pin-key del" onclick="doLogin()">ເຂົ້າ</button>`
+          : `<button class="pin-key ${k==='del'?'del':''}" onclick="pinKey('${k}')">${k==='del'?'ລຶບ':k}</button>`).join('')}
+      </div>
+      <p class="sub" style="font-size:11.5px">PIN 4–6 ຕົວ</p>
+    </div>`;
+}
+function loginPinSet(v){ loginPin=v; loginErr=''; drawLogin(); }
+function pinKey(k) {
+  if (k === 'del') loginPin = loginPin.slice(0, -1);
+  else if (loginPin.length < 6) loginPin += k;
+  loginErr = ''; drawLogin();
+  if (loginPin.length === 6) doLogin();
+}
+async function doLogin() {
+  const name = window._lgName || '';
+  if (!name) { loginErr = 'ກະລຸນາເລືອກຊື່'; return drawLogin(); }
+  if (loginPin.length < 4) { loginErr = 'PIN ຢ່າງໜ້ອຍ 4 ຕົວ'; return drawLogin(); }
+  const pin = loginPin;
+  loginPin = ''; loginErr = ''; drawLogin();
+  try {
+    const r = await api('df_login', {p_name: name, p_pin: pin});
+    if (!r.ok) { loginErr = 'PIN ບໍ່ຖືກຕ້ອງ'; return drawLogin(); }
+    lsSet('df_token', r.token);
+    S.token = r.token; S.me = r.me;
+    await boot();
+  } catch (e) { loginErr = e.message; drawLogin(); }
+}
+
+/* ============================================================
+   ບັງຄັບປ່ຽນ PIN ຄັ້ງທຳອິດ
+   ============================================================ */
+let cpA = '', cpB = '', cpStage = 1, cpErr = '';
+function drawChangePin() {
+  const cur = cpStage === 1 ? cpA : cpB;
+  $('root').innerHTML = `<div class="app"><div class="scroll">
+    <div class="pin-wrap">
+      <div class="mark" style="font-size:20px">THE FACE</div>
+      <div class="pin-rule"></div>
+      <div style="text-align:center">
+        <p style="font-size:17px;color:#fff;margin-bottom:6px">ຕັ້ງ PIN ໃໝ່</p>
+        <p class="sub">${cpStage===1?'ກອກ PIN ໃໝ່ 4–6 ຕົວ':'ກອກຊ້ຳອີກຄັ້ງ'}</p>
+      </div>
+      <div class="pin-dots">${[0,1,2,3,4,5].map(i=>`<div class="pin-dot ${cur.length>i?'f':''}"></div>`).join('')}</div>
+      <p class="pin-err">${esc(cpErr)}</p>
+      <div class="pin-pad">
+        ${['1','2','3','4','5','6','7','8','9','ok','0','del'].map(k=>
+          k==='ok' ? `<button class="pin-key del" onclick="cpNext()">ຢືນຢັນ</button>`
+          : `<button class="pin-key ${k==='del'?'del':''}" onclick="cpKey('${k}')">${k==='del'?'ລຶບ':k}</button>`).join('')}
+      </div>
+    </div></div></div>`;
+}
+function cpKey(k) {
+  if (cpStage === 1) { cpA = k === 'del' ? cpA.slice(0,-1) : (cpA.length<6 ? cpA+k : cpA); }
+  else { cpB = k === 'del' ? cpB.slice(0,-1) : (cpB.length<6 ? cpB+k : cpB); }
+  cpErr = ''; drawChangePin();
+}
+async function cpNext() {
+  if (cpStage === 1) {
+    if (cpA.length < 4) { cpErr = 'ຢ່າງໜ້ອຍ 4 ຕົວ'; return drawChangePin(); }
+    cpStage = 2; cpB = ''; return drawChangePin();
+  }
+  if (cpA !== cpB) { cpErr = 'ບໍ່ຄືກັນ ລອງໃໝ່'; cpStage = 1; cpA = ''; cpB = ''; return drawChangePin(); }
+  try {
+    const r = await api('df_change_pin', {p_token: S.token, p_new_pin: cpA});
+    if (!r.ok) { cpErr = r.error; cpStage = 1; cpA=''; cpB=''; return drawChangePin(); }
+    S.me.must_change_pin = false;
+    cpA=''; cpB=''; cpStage=1; cpErr='';
+    toast('ຕັ້ງ PIN ໃໝ່ແລ້ວ');
+    render();
+  } catch (e) { cpErr = e.message; drawChangePin(); }
+}
+
+/* ============================================================
+   ໂຫຼດຂໍ້ມູນຫຼັງເຂົ້າລະບົບ
+   ============================================================ */
+async function boot() {
+  const b = await api('df_bootstrap', {p_token: S.token});
+  S.me = b.me; S.services = b.services; S.doctors = b.doctors; S.today = b.today;
+  S.dept = myDepts()[0] || 'doctor';
+  S.lines = [newLine()];
+  if (!myDepts().length) S.page = canReport() ? 'report' : 'stock';
+  render();
+}
+
+/* ============================================================
+   ໂຄງໜ້າຫຼັກ
+   ============================================================ */
+function render() {
+  if (!S.token) return renderLogin();
+  if (!S.me) { $('root').innerHTML = `<div class="loading-wrap"><div class="spin"></div></div>`;
+    boot().catch(e => { toast(e.message, false); hardLogout(); }); return; }
+  if (S.me.must_change_pin) return drawChangePin();
+
+  const tabs = [];
+  if (myDepts().length) tabs.push(['entry',IC.edit,'ກອກຂໍ້ມູນ']);
+  if (hasStock())       tabs.push(['stock',IC.box,'ສາງຢາ']);
+  if (myDepts().length) tabs.push(['mine',IC.user,'ຂອງຂ້ອຍ']);
+  if (isMgr())          tabs.push(['manage',IC.cog,'ຈັດການ']);
+  if (canReport())      tabs.push(['report',IC.chart,'ລາຍງານ']);
+  if (!tabs.find(t => t[0] === S.page)) S.page = tabs[0][0];
+
+  const titles = {entry:'ກອກຂໍ້ມູນ', stock:'ສາງຢາ', mine:'ລາຍງານຂອງຂ້ອຍ',
+                  report:'ລາຍງານ', manage:'ຈັດການລະບົບ'};
+  $('root').innerHTML = `
+    <div class="app">
+      <div class="topbar">
+        <div class="topbar-logo">THE FACE</div>
+        <div style="flex:1">
+          <div class="topbar-title">${titles[S.page]}</div>
+          <div class="topbar-sub">${esc(S.me.name)}${isMgr()?' · ຜູ້ຈັດການ':(isViewer()?' · ຜູ້ບໍລິຫານ':'')}</div>
+        </div>
+        <button class="topbar-btn" onclick="doLogout()" aria-label="ອອກຈາກລະບົບ">${IC.exit}</button>
+      </div>
+      <div class="scroll" id="page"></div>
+      <div class="bottombar">
+        ${tabs.map(([k,i,t])=>`<button class="tab ${S.page===k?'on':''}" onclick="go('${k}')">
+          ${i}<span>${t}</span></button>`).join('')}
+      </div>
+    </div>`;
+  drawPage();
+}
+function go(p) { S.page = p; render(); }
+async function doLogout() {
+  if (!confirm('ອອກຈາກລະບົບ? ຄັ້ງໜ້າຕ້ອງກອກ PIN ໃໝ່')) return;
+  try { await api('df_logout', {p_token: S.token}); } catch(e){}
+  hardLogout();
+}
+function drawPage() {
+  if (S.page === 'entry')  return drawEntry();
+  if (S.page === 'mine')   return loadMine();
+  if (S.page === 'stock')  return loadStock();
+  if (S.page === 'report') return loadReport();
+  if (S.page === 'manage') return loadManage();
+}
+
+/* ============================================================
+   ໜ້າກອກຂໍ້ມູນ
+   ============================================================ */
+function newLine(){ return {service:'', qty:1}; }
+function feeOf(dept, name){ const s = S.services.find(x=>x.dept===dept&&x.name===name); return s?Number(s.fee):0; }
+function entryTotal(){ return S.lines.reduce((a,l)=>a + (l.service ? feeOf(S.dept,l.service)*(l.qty||1) : 0), 0); }
+
+function drawEntry() {
+  const c = CFG[S.dept], deps = myDepts();
+  $('page').innerHTML = `
+    ${deps.length>1 ? `<div class="tab-bar">${deps.map(d=>
+      `<button class="tab-btn ${d===S.dept?CFG[d].act:''}" onclick="switchDept('${d}')">${CFG[d].label}</button>`).join('')}</div>` : ''}
+    <div id="e-banner"></div>
+    <div class="card">
+      <p class="card-title">ຂໍ້ມູນໃບບິນ</p>
+      <div class="g2">
+        <div class="field"><label class="lbl">ວັນທີ</label><input type="date" id="e-date" value="${S.today}" max="${S.today}"></div>
+        <div class="field"><label class="lbl">ເລກບິນ</label><input type="text" id="e-bill" inputmode="numeric" placeholder="ຈາກໃບບິນ"></div>
+      </div>
+      <div class="field">
+        <label class="lbl">ປະເພດ</label>
+        <div class="seg" style="margin-bottom:0">${BILL_TYPES.map(b=>
+          `<button class="seg-btn ${S.billType===b.v?'on':''}" onclick="setBillType('${b.v}')">${b.t}</button>`).join('')}</div>
+      </div>
+      <div class="field"><label class="lbl">ຊື່ລູກຄ້າ *</label><input type="text" id="e-cust" placeholder="ກອກຊື່..." autocomplete="off"></div>
+      <div id="e-lines"></div>
+      <button class="btn-add" onclick="addLine()">${IC.plus} ເພີ່ມລາຍການ</button>
+      ${S.dept!=='doctor' ? `<div class="field" style="margin-top:14px">
+        <label class="lbl">ໝໍທີ່ຮັບຜິດຊອບ</label>
+        <select id="e-doctor">
+          <option value="">— ບໍ່ລະບຸ —</option>
+          <option value="ເຮັດເອງ">ເຮັດເອງ</option>
+          ${S.doctors.map(d=>`<option value="${esc(d)}">${esc(d)}</option>`).join('')}
+        </select></div>` : ''}
+      <div class="field" style="margin-top:14px"><label class="lbl">ໝາຍເຫດ</label>
+        <textarea id="e-note" rows="2" placeholder="ໝາຍເຫດ..."></textarea></div>
+    </div>
+    <div id="e-receipt"></div>
+    <div class="total-strip ${c.tot}">
+      <span style="font-size:13px;letter-spacing:.04em;opacity:.75">ຄ່າມືລວມ</span>
+      <span class="amt" id="e-total">${fm(entryTotal())}</span>
+    </div>
+    <div class="btn-sticky"><button class="btn-p" id="e-save" onclick="saveBill()" style="background:${c.color}">${IC.save} ບັນທຶກໃບບິນ</button></div>`;
+  drawLines();
+}
+function switchDept(d){ S.dept=d; S.lines=[newLine()]; drawEntry(); }
+function setBillType(v){ S.billType=v; drawEntry(); }
+function addLine(){ S.lines.push(newLine()); drawLines(); }
+function removeLine(i){ if(S.lines.length<=1) return toast('ຕ້ອງມີຢ່າງໜ້ອຍ 1 ລາຍການ', false); S.lines.splice(i,1); drawLines(); }
+function setLineSvc(i,v){ S.lines[i].service=v; drawLines(); }
+function setLineQty(i,v){ S.lines[i].qty=Math.max(1,Number(v)||1); drawLines(); }
+
+function drawLines() {
+  const svcs = S.services.filter(s=>s.dept===S.dept);
+  $('e-lines').innerHTML = S.lines.map((l,i)=>{
+    const fee = l.service ? feeOf(S.dept,l.service) : 0;
+    const q = l.qty||1;
+    return `<div class="service-box">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:9px">
+        <span class="lbl" style="margin:0">ລາຍການທີ ${i+1}</span>
+        <button class="remove-btn" style="padding:6px 9px" onclick="removeLine(${i})" aria-label="ລົບ">${IC.trash}</button>
+      </div>
+      <select onchange="setLineSvc(${i},this.value)" style="margin-bottom:9px">
+        <option value="">— ເລືອກລາຍການ —</option>
+        ${svcs.map(s=>`<option value="${esc(s.name)}" ${s.name===l.service?'selected':''}>${esc(s.name)} — ${Number(s.fee).toLocaleString()} ₭</option>`).join('')}
+      </select>
+      <div style="display:grid;grid-template-columns:96px 1fr;gap:9px;align-items:center">
+        <input type="number" min="1" max="99" value="${q}" onchange="setLineQty(${i},this.value)"
+               aria-label="ຈຳນວນ" style="text-align:center">
+        <div class="fee-wrap"><input type="text" value="${fee.toLocaleString()}" readonly
+          style="background:var(--paper);color:var(--sub)"><div class="kip">₭ / ຄັ້ງ</div></div>
+      </div>
+      ${l.service?`<div class="line-sub">${q} × ${fee.toLocaleString()} = <b>${(q*fee).toLocaleString()} ₭</b></div>`:''}
+    </div>`;
+  }).join('');
+  drawReceipt();
+  const t = $('e-total'); if (t) t.textContent = fm(entryTotal());
+}
+
+function drawReceipt() {
+  const box = $('e-receipt'); if (!box) return;
+  const picked = S.lines.filter(l=>l.service);
+  if (!picked.length) { box.innerHTML = ''; return; }
+  const total = entryTotal();
+  box.innerHTML = `
+    <div class="mbox" style="margin-top:18px">
+      <div class="mhdr"><span>ສະຫຼຸບໃບບິນ</span><span>${picked.length} ລາຍການ</span></div>
+      ${picked.map(l=>{
+        const fee = feeOf(S.dept,l.service), q = l.qty||1;
+        return `<div class="mrow" style="align-items:flex-start">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:14.5px;font-weight:400">${esc(l.service)}</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:3px">${q} × ${fee.toLocaleString()} ₭</div>
+          </div>
+          <b class="serif" style="font-size:17px;font-weight:400;white-space:nowrap">${(q*fee).toLocaleString()} ₭</b>
+        </div>`;}).join('')}
+      <div class="mrow" style="background:var(--paper);border-top:1px solid var(--line-2)">
+        <span style="font-size:13px;color:var(--sub);letter-spacing:.03em">ລວມທັງໝົດ</span>
+        <b class="serif" style="font-size:21px;font-weight:400">${total.toLocaleString()} ₭</b>
+      </div>
+    </div>`;
+}
+
+let pendingGroup = null;
+async function saveBill() {
+  const fail = (msg, id) => {
+    toast(msg, false);
+    const el = id ? $(id) : null;
+    if (el) {
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+      el.style.borderColor = 'var(--red)';
+      el.focus({preventScroll:true});
+      setTimeout(()=>{ if(el) el.style.borderColor=''; }, 2500);
+    }
+    const b = $('e-banner');
+    if (b) { b.innerHTML = `<div class="banner err">${esc(msg)}</div>`;
+             setTimeout(()=>{ const x=$('e-banner'); if(x) x.innerHTML=''; }, 5000); }
+  };
+  const date = $('e-date').value, cust = $('e-cust').value.trim();
+  const lines = S.lines.filter(l=>l.service).map(l=>({service:l.service, qty:l.qty||1}));
+  if (!date)          return fail('ກະລຸນາເລືອກວັນທີ', 'e-date');
+  if (!cust)          return fail('ກະລຸນາກອກຊື່ລູກຄ້າ', 'e-cust');
+  if (!lines.length)  return fail('ກະລຸນາເລືອກລາຍການ', 'e-lines');
+
+  if (!pendingGroup) pendingGroup = (crypto.randomUUID ? crypto.randomUUID()
+    : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{
+        const r=Math.random()*16|0; return (c==='x'?r:(r&0x3|0x8)).toString(16);}));
+
+  const btn = $('e-save'); btn.disabled = true; btn.textContent = 'ກຳລັງບັນທຶກ...';
+  try {
+    const r = await api('df_save_bill', {
+      p_token: S.token, p_entry_group: pendingGroup, p_dept: S.dept, p_date: date,
+      p_bill_no: $('e-bill').value.trim(), p_bill_type: S.billType, p_customer: cust,
+      p_note: $('e-note').value.trim(),
+      p_doctor: ($('e-doctor') ? $('e-doctor').value : ''), p_lines: lines});
+    if (!r.ok) return fail(r.error);
+    toast(r.duplicate ? 'ບິນນີ້ບັນທຶກແລ້ວ' : `ບັນທຶກສຳເລັດ ${fm(r.total)}`);
+    pendingGroup = null; S.lines = [newLine()]; S.billType = 'normal';
+    drawEntry();
+    $('page').scrollTo({top:0, behavior:'smooth'});
+  } catch (e) {
+    fail(e.message + ' — ກົດບັນທຶກອີກຄັ້ງໄດ້ ຂໍ້ມູນຈະບໍ່ຊ້ຳ');
+  } finally {
+    const b = $('e-save'); if (b) { b.disabled = false; b.innerHTML = IC.save + ' ບັນທຶກໃບບິນ'; }
+  }
+}
+
+/* ============================================================
+   ລາຍງານຂອງຂ້ອຍ
+   ============================================================ */
+function myRange() {
+  if (S.myPeriod === 'mon')   return [S.myMonth + '-01', endOfMonth(S.myMonth)];
+  if (S.myPeriod === 'range') return [S.myFrom || S.today, S.myTo || S.today];
+  return periodRange(S.myPeriod, S.today);
+}
+function myShiftMonth(n) {
+  const next = monthShift(S.myMonth, n);
+  if (next > S.today.slice(0,7)) return;
+  S.myMonth = next; S.myPeriod = 'mon'; loadMine();
+}
+function myApplyRange() {
+  const f = $('my-from').value, t = $('my-to').value;
+  if (!f || !t) return toast('ກະລຸນາເລືອກວັນທີໃຫ້ຄົບ', false);
+  if (f > t)    return toast('ວັນທີເລີ່ມຕ້ອງກ່ອນວັນທີສຸດທ້າຍ', false);
+  S.myFrom = f; S.myTo = t; S.myPeriod = 'range'; loadMine();
+}
+async function loadMine() {
+  $('page').innerHTML = `<div class="loading-wrap"><div class="spin"></div><span>ກຳລັງໂຫຼດ...</span></div>`;
+  if (!S.myMonth) S.myMonth = S.today.slice(0,7);
+  const [f,t] = myRange();
+  try {
+    const r = await api('df_my_records', {p_token: S.token, p_from: f, p_to: t});
+    S.cache.mine = r; S.showMine = 30; drawMine();
+  } catch (e) { $('page').innerHTML = `<div class="banner err">${esc(e.message)}</div>`; }
+}
+function setMyPeriod(p){ S.myPeriod=p; S.myMonth=S.today.slice(0,7); loadMine(); }
+function drawMine() {
+  const r = S.cache.mine, rows = r.rows || [];
+  const [mf,mt] = myRange();
+  const atNow = S.myMonth >= S.today.slice(0,7);
+  $('page').innerHTML = `<div class="wrap">
+    <div class="mbox" style="margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--paper);border-bottom:1px solid var(--line)">
+        <button class="pill" onclick="myShiftMonth(-1)" aria-label="ເດືອນກ່ອນ" style="padding:8px 14px">${IC.left}</button>
+        <button onclick="S.myPeriod='mon';loadMine()" class="serif"
+          style="font-size:21px;color:${S.myPeriod==='mon'?'var(--ink)':'var(--sub)'}">${monthLabel(S.myMonth)}</button>
+        <button class="pill" onclick="myShiftMonth(1)" ${atNow?'disabled':''} aria-label="ເດືອນຖັດໄປ"
+          style="padding:8px 14px;${atNow?'opacity:.3':''}">${IC.right}</button>
+      </div>
+      <div style="padding:11px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input type="date" id="my-from" value="${mf}" max="${S.today}" style="flex:1;min-width:126px;padding:9px;font-size:14px">
+        <span style="color:var(--muted);font-size:13px">ຫາ</span>
+        <input type="date" id="my-to" value="${mt}" max="${S.today}" style="flex:1;min-width:126px;padding:9px;font-size:14px">
+        <button class="pill on" onclick="myApplyRange()" style="padding:10px 18px">ຄົ້ນຫາ</button>
+      </div>
+    </div>
+    <div class="seg">${[['day','ວັນນີ້'],['week','ອາທິດ'],['month','ເດືອນນີ້'],['year','ປີນີ້'],['all','ທັງໝົດ']]
+      .map(([k,t])=>`<button class="seg-btn ${S.myPeriod===k?'on':''}" onclick="setMyPeriod('${k}')">${t}</button>`).join('')}</div>
+    <p style="font-size:12.5px;color:var(--muted);text-align:center;margin-bottom:12px">${mf} ຫາ ${mt}</p>
+    <div class="metric-grid">
+      <div class="metric-box metric-wide"><div class="metric-lbl">ຄ່າມືລວມ</div>
+        <div class="metric-val" style="font-size:30px">${fm(r.total)}</div></div>
+      <div class="metric-box"><div class="metric-lbl">ໃບບິນ</div>
+        <div class="metric-val">${groupBills(rows).length}</div></div>
+      <div class="metric-box"><div class="metric-lbl">ລາຍການ</div>
+        <div class="metric-val">${rows.length}</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:22px 0 11px">
+      <p class="sec" style="margin:0">ໃບບິນຂອງຂ້ອຍ (${groupBills(rows).length}) · ${rows.length} ລາຍການ</p>
+      <button class="pill" onclick="exportMine()" style="padding:8px 13px">${IC.down} Excel</button>
+    </div>
+    ${billList(groupBills(rows), true, false, S.showMine, 'showMine')}</div>`;
+}
+
+/* ============================================================
+   ລາຍງານທັງໝົດ (ຜູ້ຈັດການ)
+   ============================================================ */
+/* ເລືອກເດືອນ / ຊ່ວງວັນທີ */
+function endOfMonth(ym) {
+  const [y,m] = ym.split('-').map(Number);
+  return ymd(new Date(y, m, 0));
+}
+function monthShift(ym, n) {
+  const [y,m] = ym.split('-').map(Number);
+  const d = new Date(y, m-1+n, 1);
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0');
+}
+const MONTH_LO = ['ມັງກອນ','ກຸມພາ','ມີນາ','ເມສາ','ພຶດສະພາ','ມິຖຸນາ',
+                  'ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'];
+function monthLabel(ym) {
+  const [y,m] = ym.split('-').map(Number);
+  return MONTH_LO[m-1] + ' ' + y;
+}
+function repRange() {
+  if (S.repPeriod === 'all') S.repPeriod = 'month';
+  if (S.repPeriod === 'mon')   return [S.repMonth + '-01', endOfMonth(S.repMonth)];
+  if (S.repPeriod === 'range') return [S.repFrom || S.today, S.repTo || S.today];
+  return periodRange(S.repPeriod, S.today);
+}
+function shiftMonth(n) {
+  const next = monthShift(S.repMonth, n);
+  if (next > S.today.slice(0,7)) return;
+  S.repMonth = next; S.repPeriod = 'mon'; loadReport();
+}
+function applyRange() {
+  const f = $('rp-from').value, t = $('rp-to').value;
+  if (!f || !t) return toast('ກະລຸນາເລືອກວັນທີໃຫ້ຄົບ', false);
+  if (f > t)    return toast('ວັນທີເລີ່ມຕ້ອງກ່ອນວັນທີສຸດທ້າຍ', false);
+  S.repFrom = f; S.repTo = t; S.repPeriod = 'range'; loadReport();
+}
+function exportCsv() {
+  const rows = (S.cache.rep && S.cache.rep.rows) || [];
+  if (!rows.length) return toast('ບໍ່ມີຂໍ້ມູນ', false);
+  const head = ['ວັນທີ','ພະແນກ','ພະນັກງານ','ລູກຄ້າ','ລາຍການ','ຈຳນວນ','ຄ່າມື','ເລກບິນ','ປະເພດ','ໝໍ','ໝາຍເຫດ'];
+  const q = v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"';
+  const body = rows.map(r => [r.date, CFG[r.dept].label, r.staff, r.customer, r.service,
+      r.qty, r.fee, r.bill_no||'', BT[r.bill_type]||'', r.doctor||'', r.note||''].map(q).join(','));
+  const [f,t] = repRange();
+  const blob = new Blob(['\uFEFF' + [head.map(q).join(','), ...body].join('\r\n')],
+                        {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ຄ່າມື_${f}_ຫາ_${t}.csv`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('ດາວໂຫລດແລ້ວ');
+}
+
+function exportMine() {
+  const rows = (S.cache.mine && S.cache.mine.rows) || [];
+  if (!rows.length) return toast('ບໍ່ມີຂໍ້ມູນ', false);
+  const head = ['ວັນທີ','ພະແນກ','ລູກຄ້າ','ລາຍການ','ຈຳນວນ','ຄ່າມື','ເລກບິນ','ປະເພດ','ໝໍ','ໝາຍເຫດ'];
+  const q = v => '"' + String(v == null ? '' : v).replace(/"/g,'""') + '"';
+  const body = rows.map(r => [r.date, CFG[r.dept].label, r.customer, r.service, r.qty, r.fee,
+      r.bill_no||'', BT[r.bill_type]||'', r.doctor||'', r.note||''].map(q).join(','));
+  const [f,t] = myRange();
+  const blob = new Blob(['\uFEFF' + [head.map(q).join(','), ...body].join('\r\n')],
+                        {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `ຄ່າມື_${S.me.name}_${f}_ຫາ_${t}.csv`;
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('ດາວໂຫລດແລ້ວ');
+}
+
+async function loadReport() {
+  $('page').innerHTML = `<div class="loading-wrap"><div class="spin"></div><span>ກຳລັງໂຫຼດ...</span></div>`;
+  if (!S.repMonth) S.repMonth = S.today.slice(0,7);
+  const [f,t] = repRange();
+  try {
+    const r = await api('df_report', {p_token: S.token, p_from: f, p_to: t, p_dept: S.repDept});
+    if (!r.ok) { $('page').innerHTML = `<div class="banner err">${esc(r.error)}</div>`; return; }
+    S.cache.rep = r; S.showRep = 30; drawReport();
+  } catch (e) { $('page').innerHTML = `<div class="banner err">${esc(e.message)}</div>`; }
+}
+function setRepPeriod(p){ S.repPeriod=p; S.repMonth=S.today.slice(0,7); loadReport(); }
+function setRepDept(d){ S.repDept=d; loadReport(); }
+
+function drawReport() {
+  const r = S.cache.rep, sm = r.summary, staff = r.by_staff||[], rows = r.rows||[];
+  const prev = r.prev || {};
+  const daily = r.daily || [];
+  const max = staff.length ? Number(staff[0].fee) : 1;
+  const dups = rows.filter(x=>x.dup).length;
+  const [rf,rt] = repRange();
+  const atNow = S.repMonth >= S.today.slice(0,7);
+  const deptParts = (r.by_dept||[]).map(d=>({label:CFG[d.dept].label, fee:d.fee, rows:d.rows, color:CFG[d.dept].color}));
+  const btColors = ['#3B6FE0','#22A06B','#F7B32B','#F2547D','#7C5CE0'];
+
+  $('page').innerHTML = `<div class="wrap">
+    <div class="mbox" style="background:var(--card);margin-bottom:14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--paper);border-bottom:1px solid var(--line)">
+        <button class="pill" onclick="shiftMonth(-1)" aria-label="ເດືອນກ່ອນ" style="padding:8px 14px">${IC.left}</button>
+        <button onclick="S.repPeriod='mon';loadReport()" class="serif"
+          style="font-size:21px;color:${S.repPeriod==='mon'?'var(--ink)':'var(--sub)'}">${monthLabel(S.repMonth)}</button>
+        <button class="pill" onclick="shiftMonth(1)" ${atNow?'disabled':''} aria-label="ເດືອນຖັດໄປ"
+          style="padding:8px 14px;${atNow?'opacity:.3':''}">${IC.right}</button>
+      </div>
+      <div style="padding:11px 14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input type="date" id="rp-from" value="${rf}" max="${S.today}" style="flex:1;min-width:130px;padding:9px;font-size:14px">
+        <span style="color:var(--muted);font-size:13px">ຫາ</span>
+        <input type="date" id="rp-to" value="${rt}" max="${S.today}" style="flex:1;min-width:130px;padding:9px;font-size:14px">
+        <button class="pill on" onclick="applyRange()" style="padding:10px 18px">ຄົ້ນຫາ</button>
+      </div>
+    </div>
+    <div class="seg">${[['day','ວັນນີ້'],['week','ອາທິດ'],['month','ເດືອນນີ້'],['year','ປີນີ້']]
+      .map(([k,t])=>`<button class="seg-btn ${S.repPeriod===k?'on':''}" onclick="setRepPeriod('${k}')">${t}</button>`).join('')}</div>
+    <div class="seg">${[['all','ທັງໝົດ'],['doctor','ໝໍ'],['nurse','ພະຍາບານ'],['spa','ສະປາ']]
+      .map(([k,t])=>`<button class="seg-btn ${S.repDept===k?'on':''}" onclick="setRepDept('${k}')">${t}</button>`).join('')}</div>
+    ${dups ? `<div class="banner warn">ມີ ${dups} ລາຍການທີ່ອາດຊ້ຳ — ໝາຍດ້ວຍເສັ້ນສີສົ້ມ</div>` : ''}
+
+    <div class="grid grow">
+      <div class="g-card g-hero c2">
+        <div class="lab">ລວມຄ່າມື · ${rf} ຫາ ${rt}</div>
+        <div class="big">${(Number(sm.total)||0).toLocaleString()} <span style="font-size:20px;opacity:.7">₭</span></div>
+        ${pctChip(sm.total, prev.total)}
+        ${sparkBars(daily, 'rgba(255,255,255,.55)')}
+      </div>
+      <div class="kpi2">
+        <div class="g-card g-solid" style="background:#22A06B">
+          <div class="g-lab">ໃບບິນ</div>
+          <div class="g-num">${sm.bills == null ? groupBills(rows).length : sm.bills}</div>
+        </div>
+        <div class="g-card g-solid" style="background:#E0930B">
+          <div class="g-lab">ລາຍການ</div>
+          <div class="g-num">${sm.rows}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gtop">
+      <div class="g-card">
+        <div class="g-lab">ສັດສ່ວນຄ່າມື</div>
+        <div class="donut-wrap">${donut(deptParts)}</div>
+        <div class="lg" style="flex-direction:column;gap:11px">
+          ${deptParts.map(d=>`<div style="display:flex;align-items:center;width:100%">
+            <span style="flex:1"><i style="background:${d.color}"></i>${d.label}</span>
+            <b class="serif" style="font-size:19px;font-weight:400;color:var(--text)">${Number(d.fee).toLocaleString()}</b>
+          </div>`).join('')}
+        </div>
+        <div style="border-top:1px solid var(--line);margin:18px 0 14px"></div>
+        <div class="g-lab" style="margin-bottom:14px">ຕາມປະເພດບິນ</div>
+        ${(r.by_bill_type||[]).map((b,i)=>{
+          const pct = Math.round(Number(b.fee)/(Number(sm.total)||1)*100);
+          return `<div style="margin-bottom:15px">
+            <div style="display:flex;font-size:14.5px;margin-bottom:7px;align-items:baseline;gap:10px">
+              <span style="flex:1">${esc(BT[b.type]||b.type)}</span>
+              <span class="serif" style="font-size:19px">${Number(b.fee).toLocaleString()}</span>
+            </div>
+            <div class="rk-bar"><span style="width:${pct}%;background:${btColors[i%5]}"></span></div>
+            <div class="rk-sub">${b.rows} ລາຍການ · ${pct}%</div>
+          </div>`;}).join('')}
+      </div>
+
+      <div class="g-card c2">
+        <div class="g-lab">ຄ່າມືຕາມກຸ່ມການບໍລິການ</div>
+        <div style="margin-top:16px">
+          ${(function(){
+            const tops = topGroups(rows, 8);
+            if (!tops.length) return `<div class="empty">${IC.box}<p>ບໍ່ມີຂໍ້ມູນ</p></div>`;
+            const mx = Number(tops[0].fee) || 1;
+            return tops.map((v,i)=>`<div style="margin-bottom:17px">
+              <div style="display:flex;font-size:15px;gap:12px;align-items:baseline">
+                <span style="flex:1;min-width:0">${esc(v.name)}</span>
+                <span class="serif" style="font-size:19px">${Number(v.fee).toLocaleString()}</span>
+              </div>
+              <div class="rk-bar" style="margin-top:7px"><span style="width:${(v.fee/mx*100).toFixed(1)}%;background:${btColors[i%5]}"></span></div>
+              <div class="rk-sub">${v.qty} ຄັ້ງ</div>
+            </div>`).join('');
+          })()}
+        </div>
+      </div>
+    </div>
+
+    <div class="g-card c3" style="margin-bottom:16px">
+      <div class="g-lab">ອັນດັບພະນັກງານ</div>
+      <div class="rk-grid">
+        ${staff.length ? staff.map((s,i)=>{
+          const dl = s.depts||[];
+          const segs = dl.map(d=>`<span style="width:${(Number(d.fee)/max*100).toFixed(1)}%;background:${CFG[d.dept].color}"></span>`).join('');
+          return `<div class="rk">
+            <div class="rk-top">
+              <span class="rk-no ${i<3?'n'+(i+1):''}">${i+1}</span>
+              <span class="rk-nm">${esc(s.name)}</span>
+              <span class="rk-fee">${Number(s.fee).toLocaleString()}</span>
+            </div>
+            <div class="rk-bar">${segs}</div>
+            <div class="rk-sub">${dl.length>1
+              ? dl.map(d=>`<span style="color:${CFG[d.dept].color}">${CFG[d.dept].label} ${Number(d.fee).toLocaleString()}</span>`).join(' · ')
+              : (dl[0] ? CFG[dl[0].dept].label : '-')} · ${s.bills} ລາຍການ</div>
+          </div>`;}).join('') : `<div class="empty">${IC.box}<p>ບໍ່ມີຂໍ້ມູນ</p></div>`}
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:22px 0 11px">
+      <p class="sec" style="margin:0">ໃບບິນ (${groupBills(rows).length}) · ${rows.length} ລາຍການ</p>
+      <button class="pill" onclick="exportCsv()" style="padding:8px 13px">${IC.down} Excel</button>
+    </div>
+    ${billList(groupBills(rows), r.can_edit !== false, true, S.showRep, 'showRep')}
+  </div>`;
+}
+
+
+function groupBills(rows) {
+  const map = new Map();
+  rows.forEach(x => {
+    const k = x.grp || (x.date + '|' + (x.bill_no||'-') + '|' + x.customer + '|' + x.dept);
+    if (!map.has(k)) map.set(k, {key:k, date:x.date, dept:x.dept, customer:x.customer,
+      bill_no:x.bill_no, bill_type:x.bill_type, staff:x.staff, doctor:x.doctor,
+      note:x.note, dup:false, total:0, lines:[]});
+    const g = map.get(k);
+    g.lines.push(x);
+    g.total += Number(x.fee)||0;
+    if (x.dup) g.dup = true;
+    if (!g.doctor && x.doctor) g.doctor = x.doctor;
+    if (!g.note && x.note) g.note = x.note;
+  });
+  return [...map.values()];
+}
+
+function svcGroup(name) {
+  const n = String(name || '').trim();
+  const has = s => n.indexOf(s) >= 0;
+
+  if (n.indexOf('Filler') === 0 || has('ຟິນເລີ') || has('ດໍລີອາຍ') || has('ສະລາຍຟີວເລີ')) return 'Filler';
+  if (has('Botox')) return 'Botox';
+  if (n.indexOf('ໄໝ') === 0) return 'ໄໝ';
+  if (has('ເລເຊີ') || n.indexOf('ລເຊີ') === 0) return 'ເລເຊີ';
+  if (has('ອາວເທີ') || has('High fu')) return 'ອາວເທີລ່າ';
+  if (has('ແຟັດ')) return 'ແຟັດ';
+  if (has('ຄຸມ')  && has('ຫິວ')) return 'ຄຸມຫິວ';
+  if (has('ໜ້າໃສ') || has('ວິຕາມິນ') || has('ເອັກໂຊໂຊມ') || has('ລີຈຸລັນ')
+      || has('ໄຮຢາ') || has('ມາເດ')) return 'ໜ້າໃສ';
+  if (has('ສະປາ') || n.indexOf('ສະຜົມ') === 0 || has('ທິດເມັ້ນ')
+      || has('ຄໍລະຟິວ') || has('ກົດສິວ') || has('ຂັດຜິວ') || has('ຂ້ັດຜິວ')) return 'ສະປາ';
+  return 'ອື່ນໆ';
+}
+
+function topGroups(rows, n) {
+  const m = new Map();
+  rows.forEach(function(x){
+    const k = svcGroup(x.service);
+    const o = m.get(k) || {name:k, fee:0, qty:0};
+    o.fee += Number(x.fee)||0;
+    o.qty += Number(x.qty)||1;
+    m.set(k, o);
+  });
+  return [...m.values()].sort(function(a,b){return b.fee-a.fee;}).slice(0, n);
+}
+
+function topServices(rows, n) {
+  const m = new Map();
+  rows.forEach(function(x){
+    const k = x.service || '-';
+    const o = m.get(k) || {name:k, fee:0, qty:0};
+    o.fee += Number(x.fee)||0;
+    o.qty += Number(x.qty)||1;
+    m.set(k, o);
+  });
+  return [...m.values()].sort(function(a,b){return b.fee-a.fee;}).slice(0, n);
+}
+
+/* ---------- ກຣາຟ SVG ---------- */
+function sparkBars(daily, color) {
+  if (!daily || !daily.length) return '';
+  var max = 0, i;
+  for (i=0;i<daily.length;i++) if (Number(daily[i].fee) > max) max = Number(daily[i].fee);
+  if (!max) max = 1;
+  var n = daily.length, gap = 2, w = 100 / n;
+  var bars = daily.map(function(d, i){
+    var h = Math.max(1.5, Number(d.fee) / max * 88);
+    return '<rect x="' + (i*w + gap/2).toFixed(2) + '" y="' + (94-h).toFixed(2) +
+           '" width="' + Math.max(0.6, w-gap).toFixed(2) + '" height="' + h.toFixed(2) +
+           '" rx="1" fill="' + color + '"/>';
+  }).join('');
+  return '<svg class="spark" viewBox="0 0 100 96" preserveAspectRatio="none" aria-hidden="true">' + bars + '</svg>';
+}
+function donut(parts) {
+  var total = 0, i;
+  for (i=0;i<parts.length;i++) total += Number(parts[i].fee);
+  if (!total) return '';
+  var C = 2 * Math.PI * 42, off = 0;
+  var segs = parts.map(function(p){
+    var len = Number(p.fee) / total * C;
+    var s = '<circle cx="60" cy="60" r="42" fill="none" stroke="' + p.color +
+      '" stroke-width="15" stroke-dasharray="' + Math.max(0,len-1.5).toFixed(2) + ' ' + (C-len+1.5).toFixed(2) +
+      '" stroke-dashoffset="' + (-off).toFixed(2) + '" transform="rotate(-90 60 60)"/>';
+    off += len; return s;
+  }).join('');
+  return '<svg viewBox="0 0 120 120" class="donut" aria-hidden="true">'
+    + '<circle cx="60" cy="60" r="42" fill="none" stroke="#EFEBE4" stroke-width="15"/>' + segs + '</svg>';
+}
+function pctChip(now, prev) {
+  now = Number(now)||0; prev = Number(prev)||0;
+  if (!prev) return '<span class="chip flat">ບໍ່ມີຂໍ້ມູນເດືອນກ່ອນ</span>';
+  var p = Math.round((now - prev) / prev * 100);
+  if (p === 0) return '<span class="chip flat">ເທົ່າກັບເດືອນກ່ອນ</span>';
+  var up = p > 0;
+  return '<span class="chip ' + (up?'up':'down') + '">'
+    + (up ? '\u25B2 ' : '\u25BC ') + Math.abs(p) + '% ຈາກເດືອນກ່ອນ</span>';
+}
+
+function billList(bills, canEdit, showStaff, limit, key) {
+  if (!bills.length) return `<div class="empty">${IC.box}<p>ບໍ່ມີຂໍ້ມູນ</p></div>`;
+  const shown = bills.slice(0, limit);
+  const rest  = bills.length - shown.length;
+  return shown.map(g=>billCard(g, canEdit, showStaff)).join('')
+    + (rest>0 ? `<button class="btn-o" style="margin-top:6px" onclick="showMore('${key}')">
+         ສະແດງເພີ່ມ (ຍັງເຫຼືອ ${rest} ໃບ)</button>` : '');
+}
+function showMore(key) {
+  S[key] += 30;
+  key === 'showRep' ? drawReport() : drawMine();
+}
+
+function billCard(g, canEdit, showStaff) {
+  const c = CFG[g.dept] || CFG.doctor;
+  const accent = g.dup ? 'var(--amber)' : c.color;
+  return `<div class="bill" style="border-left-color:${accent}">
+    <div class="bill-head">
+      <div style="flex:1;min-width:0">
+        <div class="bill-cust">${esc(g.customer)}</div>
+        <div class="bill-meta">
+          ${showStaff?`<span style="color:${c.color};font-weight:400">${esc(g.staff)}</span><span class="dot">·</span>`:''}
+          <span>${esc(g.date)}</span>
+          ${g.bill_no?`<span class="dot">·</span><span>ບິນ ${esc(g.bill_no)}</span>`:''}
+          ${g.bill_type&&g.bill_type!=='normal'?`<span class="dot">·</span><span>${esc(BT[g.bill_type]||g.bill_type)}</span>`:''}
+          ${g.doctor?`<span class="dot">·</span><span>${esc(g.doctor)}</span>`:''}
+        </div>
+        ${g.dup?`<span class="badge badge-orange" style="margin-top:8px;display:inline-block">ອາດຊ້ຳ</span>`:''}
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div class="bill-total">${(g.total||0).toLocaleString()}<span class="cur"> ₭</span></div>
+        <div class="bill-count">${g.lines.length} ລາຍການ</div>
+      </div>
+    </div>
+    <div class="bill-lines">
+      ${g.lines.map((x,i)=>`<div class="bill-line">
+        <span class="ln-no">${i+1}</span>
+        <span class="ln-name">${esc(x.service)}</span>
+        <span class="ln-qty">${x.qty}</span>
+        <span class="ln-amt">${(Number(x.fee)||0).toLocaleString()}</span>
+        ${canEdit?`<span class="ln-act">
+          <button class="btn-icon blue" onclick="openEdit('${x.id}')" aria-label="ແກ້ໄຂ">${IC.edit}</button>
+          <button class="btn-icon red" onclick="delRec('${x.id}','${esc(x.service)}')" aria-label="ລົບ">${IC.trash}</button>
+        </span>`:''}
+      </div>`).join('')}
+      ${g.note?`<div class="bill-note">${esc(g.note)}</div>`:''}
+    </div>
+  </div>`;
+}
+
+function findRec(id) {
+  for (const k of ['rep','mine']) {
+    const c = S.cache[k]; if (!c) continue;
+    const f = (c.rows||[]).find(x=>x.id===id); if (f) return f;
+  }
+  return null;
+}
+async function delRec(id, name) {
+  if (!confirm(`ລົບລາຍການຂອງ ${name}?`)) return;
+  try {
+    const r = await api('df_delete_record', {p_token: S.token, p_id: id});
+    if (!r.ok) return toast(r.error, false);
+    toast('ລົບແລ້ວ'); drawPage();
+  } catch (e) { toast(e.message, false); }
+}
+
+/* ແກ້ໄຂ */
+function openEdit(id) {
+  const x = findRec(id); if (!x) return;
+  const svcs = S.services.filter(s=>s.dept===x.dept);
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='editOv';
+  ov.onclick = e => { if (e.target===ov) closeEdit(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>ແກ້ໄຂລາຍການ</h3>
+    <div style="flex:1;overflow-y:auto">
+      <div class="field"><label class="lbl">ລູກຄ້າ</label><input id="ed-cust" value="${esc(x.customer)}"></div>
+      <div class="g2">
+        <div class="field"><label class="lbl">ເລກບິນ</label><input id="ed-bill" value="${esc(x.bill_no||'')}"></div>
+        <div class="field"><label class="lbl">ຈຳນວນ</label><input type="number" min="1" id="ed-qty" value="${x.qty}"></div>
+      </div>
+      <div class="field"><label class="lbl">ປະເພດ</label><select id="ed-bt">
+        ${BILL_TYPES.map(b=>`<option value="${b.v}" ${x.bill_type===b.v?'selected':''}>${b.t}</option>`).join('')}
+      </select></div>
+      <div class="field"><label class="lbl">ລາຍການ</label><select id="ed-svc">
+        ${svcs.map(s=>`<option value="${esc(s.name)}" ${s.name===x.service?'selected':''}>${esc(s.name)} — ${Number(s.fee).toLocaleString()} ₭</option>`).join('')}
+      </select></div>
+      ${x.dept!=='doctor'?`<div class="field"><label class="lbl">ໝໍ</label><select id="ed-doc">
+        <option value="">— ບໍ່ລະບຸ —</option><option value="ເຮັດເອງ" ${x.doctor==='ເຮັດເອງ'?'selected':''}>ເຮັດເອງ</option>
+        ${S.doctors.map(d=>`<option value="${esc(d)}" ${x.doctor===d?'selected':''}>${esc(d)}</option>`).join('')}
+      </select></div>`:''}
+      <div class="field"><label class="lbl">ໝາຍເຫດ</label><input id="ed-note" value="${esc(x.note||'')}"></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn-o" style="flex:1" onclick="closeEdit()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="saveEdit('${x.id}')">ບັນທຶກ</button>
+    </div></div>`;
+  document.body.appendChild(ov);
+}
+function closeEdit(){ const o=$('editOv'); if(o) o.remove(); }
+async function saveEdit(id) {
+  try {
+    const r = await api('df_update_record', {
+      p_token: S.token, p_id: id,
+      p_customer: $('ed-cust').value, p_bill_no: $('ed-bill').value,
+      p_bill_type: $('ed-bt').value, p_service: $('ed-svc').value,
+      p_qty: Number($('ed-qty').value)||1,
+      p_doctor: ($('ed-doc')?$('ed-doc').value:''), p_note: $('ed-note').value});
+    if (!r.ok) return toast(r.error, false);
+    closeEdit(); toast('ແກ້ໄຂແລ້ວ'); drawPage();
+  } catch (e) { toast(e.message, false); }
+}
+
+
+/* ============================================================
+   ສະຕັອກ
+   ============================================================ */
+function injectStkStyles() {
+  if (document.getElementById('stk-css')) return;
+  const s = document.createElement('style');
+  s.id = 'stk-css';
+  s.textContent = `
+    :root { --gold:#B8964A; --gold-l:#D4AF6E; --gold-s:#F0E8D5; --gold-d:#8C7038; }
+
+    /* ===== 4-TILE STAT GRID ===== */
+    .stk-4tiles { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px; }
+    @media(max-width:520px) { .stk-4tiles { grid-template-columns:repeat(2,1fr); } }
+    .stk-tile {
+      background:var(--card);border-radius:11px;
+      padding:13px 14px;cursor:pointer;text-align:left;
+      border:1px solid var(--line);
+      transition:opacity .15s,box-shadow .15s;
+      position:relative;overflow:hidden;
+    }
+    .stk-tile::before {
+      content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
+    }
+    .stk-tile:active { opacity:.75; }
+    .stk-tile.active { box-shadow:0 2px 14px rgba(0,0,0,.08); }
+    .stk-tile.active::after {
+      content:'';position:absolute;inset:0;border-radius:11px;
+      border:2px solid var(--tile-color,var(--gold));pointer-events:none;
+    }
+    .stk-tile-lbl { font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text3);margin-bottom:5px; }
+    .stk-tile-val { font-size:24px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums; }
+    .stk-tile-pct { font-size:11px;color:var(--text3);margin-top:4px; }
+
+    /* ===== GOLD TAB BAR ===== */
+    .stk-tabs { background:var(--gold-s)!important;border:1.5px solid rgba(184,150,74,.28)!important; }
+    .stk-tabs .seg-btn { color:var(--gold-d); }
+    .stk-tabs .seg-btn.on {
+      background:linear-gradient(135deg,var(--gold-d) 0%,var(--gold) 100%)!important;
+      color:#fff!important;border:none!important;font-weight:700;
+    }
+
+    /* ===== FILTER ROW ===== */
+    .stk-filter-row {
+      display:flex;gap:8px;margin-bottom:14px;
+      flex-wrap:wrap;align-items:center;
+    }
+    .stk-filter-row input[type=search] { flex:1;min-width:130px; }
+    .stk-filter-sel {
+      padding:8px 10px;border-radius:8px;
+      border:1.5px solid var(--line);
+      background:var(--card);color:var(--text);font-size:13px;cursor:pointer;
+    }
+    .stk-filter-sel:focus { border-color:var(--gold);outline:none; }
+
+    /* ===== 2-COL CONTENT LAYOUT ===== */
+    .stk-content-layout { display:block; }
+
+
+    /* ===== TABLE CARD ===== */
+    .stk-table-wrap {
+      background:var(--card);border:1px solid var(--line);
+      border-radius:13px;overflow:hidden;
+    }
+    .stk-table-hd {
+      padding:12px 16px 10px;display:flex;align-items:center;
+      justify-content:space-between;border-bottom:1px solid var(--line);
+    }
+    .stk-table-ttl {
+      font-size:11.5px;font-weight:600;text-transform:uppercase;
+      letter-spacing:.5px;color:var(--gold-d);
+    }
+    .stk-table-scroll { overflow-x:auto; }
+    .stk-tbl { width:100%;border-collapse:collapse;min-width:380px; }
+    .stk-tbl th {
+      font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;
+      color:var(--text3);padding:9px 13px;text-align:left;
+      background:var(--bg);border-bottom:1px solid var(--line);white-space:nowrap;
+    }
+    .stk-tbl td {
+      padding:10px 13px;font-size:13px;
+      border-bottom:1px solid var(--line);vertical-align:middle;
+    }
+    .stk-tbl tr:last-child td { border-bottom:none; }
+    .stk-tbl tbody tr { cursor:pointer;transition:background .1s; }
+    .stk-tbl tbody tr:hover td { background:rgba(184,150,74,.04); }
+    .stk-tbl tbody tr:active td { background:var(--gold-s); }
+
+    /* ===== STATUS BADGE ===== */
+    .stk-badge {
+      display:inline-block;padding:2px 8px;border-radius:5px;
+      font-size:11px;font-weight:600;white-space:nowrap;
+    }
+
+
+    /* ===== SECTION CARDS (history view) ===== */
+    .stk-section-card {
+      background:var(--card);border:1px solid var(--line);
+      border-top:3px solid var(--gold);border-radius:13px;overflow:hidden;
+    }
+    .stk-section-hd {
+      padding:12px 16px 10px;display:flex;align-items:center;
+      justify-content:space-between;border-bottom:1px solid var(--line);
+    }
+    .stk-section-ttl {
+      font-size:11.5px;font-weight:600;text-transform:uppercase;
+      letter-spacing:.5px;color:var(--gold-d);
+    }
+    .stk-section-bd { padding:14px 16px; }
+
+    /* ===== MOVE HISTORY ITEMS ===== */
+    .stk-hist-item {
+      background:var(--card);border:1px solid var(--line);
+      border-radius:10px;padding:10px 12px;margin-bottom:8px;
+      display:flex;align-items:center;gap:10px;
+    }
+    .stk-hist-item:last-child { margin-bottom:0; }
+
+    /* ===== GOLD ADD BUTTON ===== */
+    .btn-gold {
+      background:linear-gradient(135deg,var(--gold-d) 0%,var(--gold-l) 100%);
+      color:#fff;font-weight:700;border:none;
+      padding:8px 14px;border-radius:8px;font-size:13px;
+      display:inline-flex;align-items:center;gap:6px;cursor:pointer;white-space:nowrap;
+    }
+    .btn-gold:active { opacity:.85; }
+
+    /* ===== MISC ===== */
+    .stk-wrap input[type=date] { background:var(--gold-s);border:1.5px solid rgba(184,150,74,.3);color:var(--gold-d);font-size:13.5px; }
+    .stk-wrap input[type=date]:focus { border-color:var(--gold); }
+
+    /* ===== HISTORY SUB-TABS ===== */
+    .hist-sub-seg {
+      display:grid;grid-template-columns:1fr 1fr;
+      background:var(--card);border:1px solid var(--line);
+      border-radius:12px;padding:4px;gap:4px;margin-bottom:16px;
+    }
+    .hist-sub-btn {
+      border:none;cursor:pointer;border-radius:8px;
+      padding:9px 0;font-family:inherit;font-size:13px;font-weight:600;
+      background:transparent;color:var(--text3);transition:all .15s;
+    }
+    .hist-sub-btn.on { background:var(--bg);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.12); }
+
+    /* ===== HISTORY DATE PICKER ===== */
+    .hist-picker {
+      background:var(--card);border:1px solid var(--line);
+      border-radius:12px;display:flex;align-items:stretch;
+      margin-bottom:18px;overflow:hidden;
+    }
+    .hist-picker-nav {
+      width:42px;display:flex;align-items:center;justify-content:center;
+      cursor:pointer;color:var(--text3);font-size:20px;font-weight:300;
+      border:none;background:transparent;transition:color .15s,background .15s;flex-shrink:0;
+    }
+    .hist-picker-nav:hover { color:var(--text);background:var(--bg); }
+    .hist-picker-nav:first-child { border-right:1px solid var(--line); }
+    .hist-picker-nav:last-child  { border-left:1px solid var(--line); }
+    .hist-picker-center {
+      flex:1;display:flex;align-items:center;justify-content:center;
+      gap:8px;padding:12px 8px;position:relative;cursor:pointer;
+    }
+    .hist-picker-icon { width:15px;height:15px;flex-shrink:0;color:var(--text3); }
+    .hist-picker-lbl { font-size:14px;font-weight:600;color:var(--text);transition:color .15s;white-space:nowrap; }
+    .hist-picker-center:hover .hist-picker-lbl { color:var(--gold); }
+    .hist-picker-center input { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+
+    /* ===== HISTORY KIND BADGE ===== */
+    .hist-kind-badge {
+      display:inline-flex;align-items:center;gap:5px;
+      font-size:11px;font-weight:700;letter-spacing:.4px;
+      padding:3px 10px 3px 8px;border-radius:99px;margin-bottom:8px;
+    }
+    .hist-kind-badge .hpip { width:5px;height:5px;border-radius:50%; }
+
+    /* ===== HISTORY MOVE CARDS ===== */
+    .hist-mv-grp { margin-bottom:20px; }
+    .hist-mv-card {
+      background:var(--card);border:1px solid var(--line);
+      border-radius:11px;margin-bottom:7px;
+      display:flex;align-items:center;gap:12px;padding:12px 14px;
+    }
+    .hist-mv-card:last-child { margin-bottom:0; }
+    .hist-mv-name { font-size:14px;font-weight:600; }
+    .hist-mv-meta { font-size:11px;color:var(--text3);margin-top:3px; }
+    .hist-mv-qty  { font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1; }
+    .hist-mv-after{ font-size:11px;color:var(--text3);margin-top:3px; }
+
+    /* ===== MONTHLY ITEM CARDS ===== */
+    .hist-item-card {
+      background:var(--card);border:1px solid var(--line);
+      border-radius:11px;padding:12px 14px;margin-bottom:8px;
+    }
+    .hist-item-top { display:flex;justify-content:space-between;align-items:center;margin-bottom:10px; }
+    .hist-item-name { font-size:14px;font-weight:600; }
+    .hist-item-chips { display:flex;gap:6px; }
+    .hist-chip { font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;padding:2px 9px;border-radius:99px; }
+    .hist-dual-bar { display:flex;flex-direction:column;gap:5px; }
+    .hist-bar-row { display:flex;align-items:center;gap:8px; }
+    .hist-bar-lbl { font-size:10px;font-weight:600;width:28px;color:var(--text3);flex-shrink:0; }
+    .hist-bar-track { flex:1;height:4px;background:var(--line);border-radius:99px;overflow:hidden; }
+    .hist-bar-fill { height:100%;border-radius:99px;transition:width .4s; }
+  `;
+  document.head.appendChild(s);
+}
+
+async function loadStock() {
+  $('page').innerHTML = `<div class="loading-wrap"><div class="spin"></div><span>ກຳລັງໂຫຼດ...</span></div>`;
+  try {
+    const r = await api('df_stock_list', {p_token: S.token});
+    if (!r.ok) { $('page').innerHTML = `<div class="banner err">${esc(r.error)}</div>`; return; }
+    S.cache.stock = r;
+    if (S.stkOrigin   === undefined) S.stkOrigin   = 'all';
+    if (S.stkView     === undefined) S.stkView     = 'items';
+    if (S.stkDate     === undefined) S.stkDate     = new Date().toISOString().slice(0,10);
+    if (S.stkMainView === undefined) S.stkMainView = 'items';
+    if (S.stkGrp      === undefined) S.stkGrp      = 'all';
+    if (S.stkQ        === undefined) S.stkQ        = '';
+    if (S.stkStatus   === undefined) S.stkStatus   = 'all';
+    if (S.stkHistTab  === undefined) S.stkHistTab  = 'day';
+    if (S.stkMonth    === undefined) S.stkMonth    = new Date().toISOString().slice(0,7);
+    injectStkStyles();
+    drawStock();
+  } catch (e) { $('page').innerHTML = `<div class="banner err">${esc(e.message)}</div>`; }
+}
+
+const MOVE_LABEL = {in:'ຮັບເຂົ້າ', out:'ເບີກອອກ', count:'ນັບສະຕັອກ'};
+const MOVE_COLOR = {in:'#22A06B', out:'#3B6FE0', count:'#E0930B'};
+
+function stockState(it) {
+  if (Number(it.qty) <= 0)              return {k:'out',  label:'ໝົດ',     color:'#C23A5F', bg:'#FBF1F0'};
+  if (Number(it.qty) <= Number(it.min_qty)) return {k:'low', label:'ໃກ້ໝົດ', color:'#B07407', bg:'#FEF5E3'};
+  return {k:'ok', label:'', color:'#22A06B', bg:'transparent'};
+}
+
+function drawStock() {
+  const r = S.cache.stock, items = r.items || [], moves = r.recent || [];
+  const groups = r.groups || [];
+  const mainView = S.stkMainView || 'items';
+
+  // ── STAT TILE COUNTS (across all items, no filter for the tiles) ──
+  const nAll = items.length;
+  const nOut = items.filter(x => Number(x.qty) <= 0).length;
+  const nLow = items.filter(x => Number(x.qty) > 0 && Number(x.qty) <= Number(x.min_qty)).length;
+  const nOk  = nAll - nOut - nLow;
+  const pctOk  = nAll ? Math.round(nOk / nAll * 100)  : 0;
+  const pctLow = nAll ? Math.round(nLow / nAll * 100) : 0;
+  const pctOut = nAll ? Math.round(nOut / nAll * 100)  : 0;
+
+  const mkTile = (status, label, count, pct, color, borderColor) => {
+    const isActive = (S.stkStatus || 'all') === status;
+    return `<button class="stk-tile${isActive?' active':''}"
+      style="--tile-color:${color}"
+      onclick="setStkStatus('${status}')">
+      <div style="position:absolute;top:0;left:0;bottom:0;width:3px;background:${borderColor};border-radius:3px 0 0 3px"></div>
+      <div class="stk-tile-lbl" style="padding-left:6px">${label}</div>
+      <div class="stk-tile-val" style="color:${color};padding-left:6px">${count}</div>
+      <div class="stk-tile-pct" style="padding-left:6px">${pct}%</div>
+    </button>`;
+  };
+
+  const tilesHtml = `<div class="stk-4tiles">
+    ${mkTile('all','ທັງໝົດ', nAll, 100, 'var(--gold)', 'var(--gold)')}
+    ${mkTile('ok','ປົກກະຕິ', nOk, pctOk, '#1B8C6E', '#22A06B')}
+    ${mkTile('low','ໃກ້ໝົດ', nLow, pctLow, '#B07407', '#E0930B')}
+    ${mkTile('out','ໝົດ', nOut, pctOut, '#C23A5F', '#C23A5F')}
+  </div>`;
+
+  const tabHtml = `<div class="seg stk-tabs" style="margin-bottom:14px">
+    <button class="seg-btn ${mainView==='items'?'on':''}" style="flex:1" onclick="setStkMainView('items')">ລາຍການ</button>
+    <button class="seg-btn ${mainView==='history'?'on':''}" style="flex:1" onclick="setStkMainView('history')">ປະຫວັດ</button>
+  </div>`;
+
+  // ── HISTORY TAB ───────────────────────────────────────────────
+  if (mainView === 'history') {
+    const histTab = S.stkHistTab || 'day';
+    const calSvg = `<svg class="hist-picker-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1.5" y="2.5" width="13" height="12" rx="2"/><path d="M1.5 6.5h13M5 1v3M11 1v3"/></svg>`;
+    const dayPickerHtml = `
+      <div class="hist-picker">
+        <button class="hist-picker-nav" onclick="shiftStkDate(-1)">&#8249;</button>
+        <div class="hist-picker-center" onclick="document.getElementById('stk-date').showPicker?.()">
+          ${calSvg}
+          <span class="hist-picker-lbl" id="stk-date-lbl">${fmtStkDay(S.stkDate)}</span>
+          <input type="date" id="stk-date" value="${S.stkDate}"
+            onchange="S.stkDate=this.value;document.getElementById('stk-date-lbl').textContent=fmtStkDay(this.value);loadStockHistory()">
+        </div>
+        <button class="hist-picker-nav" onclick="shiftStkDate(1)">&#8250;</button>
+      </div>`;
+    const monPickerHtml = `
+      <div class="hist-picker">
+        <button class="hist-picker-nav" onclick="shiftStkMonth(-1)">&#8249;</button>
+        <div class="hist-picker-center" onclick="document.getElementById('stk-month').showPicker?.()">
+          ${calSvg}
+          <span class="hist-picker-lbl" id="stk-month-lbl">${fmtStkMon(S.stkMonth)}</span>
+          <input type="month" id="stk-month" value="${S.stkMonth}"
+            onchange="S.stkMonth=this.value;document.getElementById('stk-month-lbl').textContent=fmtStkMon(this.value);loadStockHistoryMonth()">
+        </div>
+        <button class="hist-picker-nav" onclick="shiftStkMonth(1)">&#8250;</button>
+      </div>`;
+    $('page').innerHTML = `<div class="wrap stk-wrap">
+      ${tilesHtml}
+      ${tabHtml}
+      <div class="hist-sub-seg">
+        <button class="hist-sub-btn${histTab==='day'?' on':''}" onclick="setStkHistTab('day')">ລາຍວັນ</button>
+        <button class="hist-sub-btn${histTab==='mon'?' on':''}" onclick="setStkHistTab('mon')">ລາຍເດືອນ</button>
+      </div>
+      ${histTab==='day' ? dayPickerHtml : monPickerHtml}
+      <div id="stk-hist-wrap"><div class="loading-wrap" style="min-height:80px"><div class="spin"></div></div></div>
+    </div>`;
+    if (histTab === 'day') loadStockHistory();
+    else loadStockHistoryMonth();
+    return;
+  }
+
+  // ── ITEMS TAB ─────────────────────────────────────────────────
+  const origSel = S.stkOrigin || 'all';
+  const grpSel  = S.stkGrp    || 'all';
+
+  const origOptions = [
+    `<option value="all"${origSel==='all'?' selected':''}>ທຸກແຫຼ່ງ</option>`,
+    `<option value="ໄທ"${origSel==='ໄທ'?' selected':''}>🇹🇭 ໄທ</option>`,
+    `<option value="ເກົາຫຼີ"${origSel==='ເກົາຫຼີ'?' selected':''}>🇰🇷 ເກົາຫຼີ</option>`,
+    `<option value="ອື່ນໆ"${origSel==='ອື່ນໆ'?' selected':''}>🌐 ອື່ນໆ</option>`
+  ].join('');
+
+  const grpOptions = `<option value="all"${grpSel==='all'?' selected':''}>ທຸກກຸ່ມ</option>` +
+    groups.map(g=>`<option value="${esc(g)}"${grpSel===g?' selected':''}>${esc(g)}</option>`).join('');
+
+
+  $('page').innerHTML = `<div class="wrap stk-wrap">
+    ${tilesHtml}
+    ${tabHtml}
+    <div class="stk-filter-row">
+      <input type="search" id="stk-q" value="${esc(S.stkQ||'')}" placeholder="ຄົ້ນຫາ..."
+             oninput="S.stkQ=this.value;drawStockList()" autocomplete="off">
+      <select class="stk-filter-sel" onchange="setStkOrigin(this.value)">${origOptions}</select>
+      <select class="stk-filter-sel" onchange="setStkGrp(this.value)">${grpOptions}</select>
+      ${r.can_edit ? `<button class="btn-gold" onclick="openStockItem()">${IC.plus} ເພີ່ມ</button>` : ''}
+    </div>
+    <div class="stk-content-layout">
+      <div class="stk-table-wrap">
+        <div class="stk-table-hd">
+          <span class="stk-table-ttl">ລາຍການສາງ</span>
+          <span id="stk-count-lbl" style="font-size:12px;color:var(--text3)"></span>
+        </div>
+        <div class="stk-table-scroll">
+          <div id="stk-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  drawStockList();
+}
+
+function setStkGrp(g)      { S.stkGrp    = g; drawStockList(); }
+function setStkOrigin(o)   { S.stkOrigin = o; drawStockList(); }
+function setStkView(v)     { S.stkView   = v; drawStock(); }
+function setStkMainView(v) { S.stkMainView = v; drawStock(); }
+function setStkStatus(s)   { S.stkStatus = s; drawStock(); }
+function setStkHistTab(t)  { S.stkHistTab = t; drawStock(); }
+
+const _LAO_MON = ['ມັງກອນ','ກຸມພາ','ມີນາ','ເມສາ','ພຶດສະພາ','ມິຖຸນາ','ກໍລະກົດ','ສິງຫາ','ກັນຍາ','ຕຸລາ','ພະຈິກ','ທັນວາ'];
+function fmtStkDay(v){ try{ const [y,m,d]=v.split('-'); return `${parseInt(d)} ${_LAO_MON[parseInt(m)-1]} ${y}`; }catch(e){ return v||''; } }
+function fmtStkMon(v){ try{ const [y,m]=v.split('-'); return `${_LAO_MON[parseInt(m)-1]} ${y}`; }catch(e){ return v||''; } }
+
+function shiftStkDate(d){
+  try{
+    const dt=new Date((S.stkDate||new Date().toISOString().slice(0,10))+'T00:00:00');
+    dt.setDate(dt.getDate()+d);
+    S.stkDate=dt.toISOString().slice(0,10);
+  }catch(e){}
+  drawStock();
+}
+function shiftStkMonth(d){
+  try{
+    const [y,m]=(S.stkMonth||new Date().toISOString().slice(0,7)).split('-').map(Number);
+    const dt=new Date(y,m-1+d,1);
+    S.stkMonth=`${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}`;
+  }catch(e){}
+  drawStock();
+}
+
+function drawStockList() {
+  const box = $('stk-list'); if (!box) return;
+  const items = (S.cache.stock.items || []);
+  const q = (S.stkQ||'').trim().toLowerCase();
+  const stkOrig   = S.stkOrigin || 'all';
+  const stkGrp    = S.stkGrp    || 'all';
+  const stkStatus = S.stkStatus || 'all';
+
+  // normalise raw DB origin → canonical Lao label (handles English abbreviations too)
+  const ORIG_NORM = {
+    'ໄທ':'ໄທ','TH':'ໄທ','Thai':'ໄທ','thai':'ໄທ',
+    'ເກົາຫຼີ':'ເກົາຫຼີ','KR':'ເກົາຫຼີ','Korea':'ເກົາຫຼີ','korea':'ເກົາຫຼີ',
+    'ອື່ນໆ':'ອື່ນໆ'
+  };
+  const ORIG_FLAG = {'ໄທ':'🇹🇭','ເກົາຫຼີ':'🇰🇷','ອື່ນໆ':'🌐'};
+  const normOrig = o => o ? (ORIG_NORM[o] || 'ອື່ນໆ') : '';
+
+  const shown = items.filter(function(it){
+    if (stkOrig !== 'all' && normOrig(it.origin) !== stkOrig) return false;
+    if (stkGrp  !== 'all' && it.grp   !== stkGrp)  return false;
+    const qty = Number(it.qty), minQ = Number(it.min_qty);
+    if (stkStatus === 'out' && !(qty <= 0))          return false;
+    if (stkStatus === 'low' && !(qty > 0 && qty <= minQ)) return false;
+    if (stkStatus === 'ok'  && !(qty > minQ))        return false;
+    if (q) {
+      const hay = (String(it.name)+' '+String(it.grp||'')+' '+String(it.unit||'')+' '+String(it.origin||'')).toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    return true;
+  });
+
+  // Update count label
+  const cl = $('stk-count-lbl');
+  if (cl) cl.textContent = shown.length + ' ລາຍການ';
+
+  if (!shown.length) {
+    box.innerHTML = `<div class="empty" style="padding:30px 16px">${IC.box}<p>${q?'ບໍ່ພົບ "'+esc(S.stkQ||'')+'"':'ບໍ່ມີລາຍການ'}</p></div>`;
+    return;
+  }
+
+  let html = `<table class="stk-tbl">
+    <thead><tr>
+      <th style="width:52px"></th>
+      <th>ຊື່ລາຍການ</th>
+      <th>ກຸ່ມ</th>
+      <th style="text-align:center">ແຫຼ່ງ</th>
+      <th style="text-align:right">ຈຳນວນ</th>
+      <th>ສະຖານະ</th>
+    </tr></thead>
+    <tbody>`;
+
+  shown.forEach(function(it){
+    const st = stockState(it);
+    const thumb = it.img_url
+      ? `<img src="${esc(it.img_url)}" style="width:44px;height:44px;object-fit:cover;border-radius:8px;display:block">`
+      : `<div style="width:44px;height:44px;border-radius:8px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:22px">💊</div>`;
+
+    const badgeStyle = st.k === 'ok'
+      ? 'background:#E8F7F1;color:#166A40'
+      : st.k === 'low'
+      ? 'background:#FEF5E3;color:#8A5A00'
+      : 'background:#FDEEF1;color:#B22242';
+    const badgeLabel = st.k === 'ok' ? 'ປົກກະຕິ' : st.label;
+
+    const origFlag = it.origin ? (ORIG_FLAG[normOrig(it.origin)] || '🌐') : '';
+    const qtyColor = st.k === 'ok' ? 'var(--text)' : st.color;
+
+    html += `<tr onclick="openItemMenu('${it.id}')">
+      <td style="padding-right:4px">${thumb}</td>
+      <td>
+        <div style="font-weight:600;font-size:13.5px;line-height:1.3">${esc(it.name)}</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:2px">ເຕືອນ &lt; ${Number(it.min_qty).toLocaleString()} ${esc(it.unit)}</div>
+      </td>
+      <td style="font-size:12px;color:var(--text3);white-space:nowrap">${esc(it.grp||'-')}</td>
+      <td style="text-align:center;font-size:20px">${origFlag}</td>
+      <td style="text-align:right;white-space:nowrap">
+        <span style="font-size:15px;font-weight:700;font-variant-numeric:tabular-nums;color:${qtyColor}">${Number(it.qty).toLocaleString()}</span>
+        <span style="font-size:11px;color:var(--text3);margin-left:2px">${esc(it.unit)}</span>
+      </td>
+      <td><span class="stk-badge" style="${badgeStyle}">${badgeLabel}</span></td>
+    </tr>`;
+  });
+
+  html += '</tbody></table>';
+  box.innerHTML = html;
+}
+
+/* ແຕະແຖວ → ເມນູ */
+function openItemMenu(id) {
+  const r = S.cache.stock;
+  const it = (r.items||[]).find(x=>x.id===id); if (!it) return;
+  const st = stockState(it);
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='imOv';
+  ov.onclick = e => { if (e.target===ov) closeItemMenu(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    ${it.img_url ? `<img src="${esc(it.img_url)}" alt="${esc(it.name)}"
+      style="width:100%;max-height:200px;object-fit:cover;border-radius:12px;margin-bottom:14px">` : ''}
+    <div style="display:flex;align-items:flex-end;gap:14px;margin-bottom:20px">
+      <div style="flex:1;min-width:0">
+        <h3 style="margin:0 0 6px">${esc(it.name)}</h3>
+        <p class="rk-sub" style="margin:0">${st.label?`<b style="color:${st.color}">${st.label}</b> · `:''}ເຕືອນຕ່ຳກວ່າ ${Number(it.min_qty).toLocaleString()} ${esc(it.unit)}${it.origin&&it.origin!=='ອື່ນໆ'?` · ${esc(it.origin)}`:''}</p>
+      </div>
+      <div class="serif" style="font-size:34px;line-height:1;white-space:nowrap;color:${st.k==='ok'?'var(--text)':st.color}">
+        ${Number(it.qty).toLocaleString()}<span style="font-size:15px;color:var(--sub);font-family:inherit"> ${esc(it.unit)}</span></div>
+    </div>
+    ${r.can_in    ? `<button class="btn-p" style="background:#22A06B;margin-bottom:10px" onclick="openMove('${id}','in')">ຮັບເຂົ້າ</button>`:''}
+    ${r.can_out   ? `<button class="btn-p" style="background:#3B6FE0;margin-bottom:10px" onclick="openMove('${id}','out')">ເບີກອອກ</button>`:''}
+    ${r.can_count ? `<button class="btn-o" style="margin-bottom:10px" onclick="openMove('${id}','count')">ນັບສະຕັອກ</button>`:''}
+    ${r.can_edit  ? `<button class="btn-o" style="margin-bottom:10px" onclick="openStockItem('${id}')">ແກ້ໄຂລາຍການ</button>`:''}
+    ${r.can_edit  ? `<button class="btn-o" style="margin-bottom:10px;color:var(--red);border-color:#EBD8D6" onclick="closeItemMenu();delStockItem('${id}','${esc(it.name)}')">ລຶບລາຍການ</button>`:''}
+    <button class="btn-o" onclick="closeItemMenu()">ປິດ</button>
+  </div>`;
+  document.body.appendChild(ov);
+}
+function closeItemMenu(){ const o=$('imOv'); if(o) o.remove(); }
+
+/* ຮັບເຂົ້າ / ເບີກອອກ / ນັບ */
+function openMove(id, kind) {
+  closeItemMenu();
+  const it = (S.cache.stock.items||[]).find(x=>x.id===id); if (!it) return;
+  const title = MOVE_LABEL[kind];
+  const hint = kind==='count'
+    ? `ຄົງເຫຼືອໃນລະບົບ ${Number(it.qty).toLocaleString()} ${esc(it.unit)} — ໃສ່ຈຳນວນຈິງທີ່ນັບໄດ້`
+    : `ຄົງເຫຼືອ ${Number(it.qty).toLocaleString()} ${esc(it.unit)}`;
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='mvOv';
+  ov.onclick = e => { if (e.target===ov) closeMove(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>${title} — ${esc(it.name)}</h3>
+    <p class="rk-sub" style="margin:-10px 0 16px">${hint}</p>
+    <div class="field"><label class="lbl">ຈຳນວນ (${esc(it.unit)}) *</label>
+      <input type="number" id="mv-qty" min="0" step="1" inputmode="numeric"
+             value="${kind==='count'?Number(it.qty):''}" style="font-size:20px;text-align:center"></div>
+    <div class="field"><label class="lbl">ໝາຍເຫດ</label>
+      <input type="text" id="mv-note" placeholder="${kind==='in'?'ຊື້ຈາກ...':'ໃຊ້ກັບ...'}"></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-o" style="flex:1" onclick="closeMove()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="doMove('${id}','${kind}')">${title}</button>
+    </div></div>`;
+  document.body.appendChild(ov);
+  setTimeout(()=>{ const q=$('mv-qty'); if(q) q.focus(); }, 100);
+}
+function closeMove(){ const o=$('mvOv'); if(o) o.remove(); }
+
+async function doMove(id, kind) {
+  const qty = Number($('mv-qty').value);
+  if (!(qty >= 0) || (kind !== 'count' && qty <= 0)) return toast('ກະລຸນາໃສ່ຈຳນວນ', false);
+  const fn = kind === 'in' ? 'df_stock_in' : (kind === 'out' ? 'df_stock_out' : 'df_stock_count');
+  try {
+    const r = await api(fn, {p_token: S.token, p_id: id, p_qty: qty, p_note: $('mv-note').value});
+    if (!r.ok) return toast(r.error, false);
+    closeMove();
+    toast(MOVE_LABEL[kind] + ' ສຳເລັດ · ຄົງເຫຼືອ ' + Number(r.qty).toLocaleString());
+    loadStock();
+  } catch (e) { toast(e.message, false); }
+}
+
+/* ເພີ່ມ / ແກ້ລາຍການ */
+function openStockItem(id) {
+  closeItemMenu();
+  const it = id ? (S.cache.stock.items||[]).find(x=>x.id===id) : null;
+  const origins = ['ໄທ','ເກົາຫຼີ','ອື່ນໆ'];
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='siOv';
+  ov.onclick = e => { if (e.target===ov) closeStockItem(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>${it?'ແກ້ໄຂລາຍການ':'ເພີ່ມລາຍການໃໝ່'}</h3>
+    <div class="field"><label class="lbl">ຊື່ລາຍການ *</label>
+      <input id="si-name" value="${it?esc(it.name):''}" placeholder="ເຊັ່ນ: Botox"></div>
+    <div class="field"><label class="lbl">ກຸ່ມ</label>
+      <select id="si-grp" onchange="onGrpChange()">
+        ${(S.cache.stock.groups||[]).map(g=>`<option value="${esc(g)}" ${it&&it.grp===g?'selected':''}>${esc(g)}</option>`).join('')}
+        <option value="__new__">+ ເພີ່ມກຸ່ມໃໝ່...</option>
+      </select>
+      <input id="si-grp-new" placeholder="ຊື່ກຸ່ມໃໝ່" autocomplete="off"
+        style="display:none;margin-top:6px">
+      <button type="button" onclick="openGrpMgr()"
+        style="margin-top:5px;width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:5px 8px;font-size:12px;cursor:pointer;color:var(--sub);text-align:center">ຈັດການກຸ່ມ...</button>
+    </div>
+    <div class="g2">
+      <div class="field"><label class="lbl">ຫົວໜ່ວຍ</label>
+        <input id="si-unit" value="${it?esc(it.unit):''}" placeholder="ຂວດ / ກ່ອງ / ເສັ້ນ"></div>
+      <div class="field"><label class="lbl">ເຕືອນເມື່ອຕ່ຳກວ່າ</label>
+        <input type="number" id="si-min" min="0" value="${it?Number(it.min_qty):0}"></div>
+    </div>
+    <div class="field"><label class="lbl">ແຫຼ່ງທີ່ມາ</label>
+      <select id="si-origin">
+        <option value="" ${!it||!it.origin?'selected':''}>— ບໍ່ລະບຸ —</option>
+        <option value="ໄທ" ${it&&['ໄທ','TH','Thai','thai'].includes(it.origin)?'selected':''}>🇹🇭 ໄທ</option>
+        <option value="ເກົາຫຼີ" ${it&&['ເກົາຫຼີ','KR','Korea','korea'].includes(it.origin)?'selected':''}>🇰🇷 ເກົາຫຼີ</option>
+        <option value="ອື່ນໆ" ${it&&it.origin&&!['ໄທ','TH','Thai','thai','ເກົາຫຼີ','KR','Korea','korea',''].includes(it.origin)?'selected':''}>🌐 ອື່ນໆ</option>
+      </select></div>
+    ${it?`<div class="field"><label class="lbl">ຮູບສິນຄ້າ</label>
+      <div id="si-img-preview-wrap">${it.img_url ? '<div style="text-align:center;margin-bottom:8px"><img src="'+esc(it.img_url)+'" style="width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--line)"></div>' : ''}</div>
+      <input type="file" id="si-img" accept="image/*" onchange="prevStockImg(this)"
+        style="font-size:13px;color:var(--fg);width:100%"></div>
+    <label class="chk" style="margin-bottom:16px">
+      <input type="checkbox" id="si-active" ${it.active?'checked':''}> ໃຊ້ງານຢູ່</label>`:''}
+    <div style="display:flex;gap:10px">
+      <button class="btn-o" style="flex:1" onclick="closeStockItem()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="saveStockItem(${it?`'${it.id}'`:'null'})">ບັນທຶກ</button>
+    </div>
+    ${it?`<button class="btn-o" style="margin-top:12px;color:var(--red);border-color:#EBD8D6"
+      onclick="delStockItem('${it.id}','${esc(it.name)}')">ລຶບລາຍການນີ້</button>`:''}
+    </div>`;
+  document.body.appendChild(ov);
+  setTimeout(()=>{ const n=$('si-name'); if(n) n.focus(); }, 100);
+}
+function closeStockItem(){ const o=$('siOv'); if(o) o.remove(); }
+
+function onGrpChange() {
+  const sel=$('si-grp'), inp=$('si-grp-new');
+  if (!inp) return;
+  if (sel && sel.value==='__new__') { inp.style.display=''; setTimeout(()=>inp.focus(),50); }
+  else inp.style.display='none';
+}
+
+function openGrpMgr() {
+  const groups=S.cache.stock.groups||[], items=S.cache.stock.items||[];
+  const cnt={}; items.forEach(i=>{cnt[i.grp]=(cnt[i.grp]||0)+1;});
+  const rows=groups.length ? groups.map(g=>{
+    const n=cnt[g]||0;
+    return `<div style="display:flex;align-items:center;gap:10px;padding:11px 0;border-top:1px solid var(--line)">
+      <span style="flex:1;font-size:15px">${esc(g)}</span>
+      <span style="font-size:12px;color:var(--sub)">${n} ລາຍການ</span>
+      <button onclick="deleteGroup('${g.replace(/\\/g,'\\\\').replace(/'/g,"\\'")}',${n})"
+        style="background:var(--card);border:1.5px solid #EBD8D6;color:var(--red);border-radius:8px;padding:5px 10px;font-size:12px;cursor:pointer">ລຶບ</button>
+    </div>`;
+  }).join('') : `<p style="text-align:center;color:var(--sub);padding:20px 0">ຍັງບໍ່ມີກຸ່ມ</p>`;
+  const ov=document.createElement('div'); ov.className='overlay'; ov.id='grpOv';
+  ov.onclick=e=>{if(e.target===ov)closeGrpMgr();};
+  ov.innerHTML=`<div class="sheet"><div class="handle"></div>
+    <h3>ຈັດການກຸ່ມ</h3>
+    <div>${rows}</div>
+    <button class="btn-o" style="margin-top:14px" onclick="closeGrpMgr()">ປິດ</button>
+  </div>`;
+  document.body.appendChild(ov);
+}
+function closeGrpMgr(){const o=$('grpOv');if(o)o.remove();}
+
+function deleteGroup(grp,count){
+  if(count>0){toast('ມີ '+count+' ລາຍການໃນກຸ່ມນີ້ — ກາລຸນາປ່ຽນກຸ່ມຂອງລາຍການທັງໝົດກ່ອນ',false);return;}
+  if(!confirm('ລຶບກຸ່ມ "'+grp+'"?'))return;
+  S.cache.stock.groups=(S.cache.stock.groups||[]).filter(g=>g!==grp);
+  closeGrpMgr();
+  const sel=$('si-grp');
+  if(sel){
+    const cur=sel.value;
+    sel.innerHTML=(S.cache.stock.groups||[]).map(g=>`<option value="${esc(g)}">${esc(g)}</option>`).join('')+'<option value="__new__">+ ເພີ່ມກຸ່ມໃໝ່...</option>';
+    if(cur!==grp&&(S.cache.stock.groups||[]).includes(cur)) sel.value=cur;
+    else if(S.cache.stock.groups&&S.cache.stock.groups.length) sel.value=S.cache.stock.groups[0];
+    else sel.value='__new__';
+    onGrpChange();
+  }
+  toast('ລຶບກຸ່ມ "'+grp+'" ແລ້ວ');
+}
+
+async function delStockItem(id, name) {
+  if (!confirm('ລຶບ "' + name + '" ອອກຈາກສາງຢາ?\n\nຖ້າເຄີຍມີການຮັບເຂົ້າ/ເບີກອອກ ລະບົບຈະເຊື່ອງໄວ້ ແທນການລຶບ ເພື່ອຮັກສາປະຫວັດ')) return;
+  try {
+    const r = await api('df_stock_item_delete', {p_token: S.token, p_id: id});
+    if (!r.ok) return toast(r.error, false);
+    closeStockItem(); toast(r.message || 'ລຶບແລ້ວ'); loadStock();
+  } catch (e) { toast(e.message, false); }
+}
+
+async function saveStockItem(id) {
+  const name = $('si-name').value.trim();
+  if (!name) return toast('ກະລຸນາໃສ່ຊື່ລາຍການ', false);
+  const grpSel = $('si-grp');
+  let grpVal = grpSel ? grpSel.value : null;
+  if (grpVal === '__new__') {
+    grpVal = $('si-grp-new') ? $('si-grp-new').value.trim() : '';
+    if (!grpVal) return toast('ກະລຸນາໃສ່ຊື່ກຸ່ມໃໝ່', false);
+  }
+  const act    = $('si-active');
+  const imgInp = $('si-img');
+  let img_url  = null;
+  if (imgInp && imgInp.files && imgInp.files[0]) {
+    const btn = document.querySelector('#siOv .btn-p');
+    if (btn) { btn.disabled = true; btn.textContent = 'ກຳລັງອັບໂຫລດ...'; }
+    try { img_url = await uploadStockImage(imgInp.files[0]); }
+    catch(e) { if (btn) { btn.disabled=false; btn.textContent='ບັນທຶກ'; }
+      return toast('ອັບໂຫລດຮູບລົ້ມເຫຼວ: ' + e.message, false); }
+  }
+  try {
+    const params = {p_token: S.token, p_id: id,
+      p_name: name, p_unit: $('si-unit').value,
+      p_min: Number($('si-min').value)||0,
+      p_grp:    grpVal,
+      p_active: act ? act.checked : true};
+    const r = await api('df_stock_item_save', params);
+    if (!r.ok) return toast(r.error, false);
+    if (id) {
+      const origSel = $('si-origin');
+      if (origSel) {
+        try { await api('df_stock_set_origin', {p_token: S.token, p_id: id, p_origin: origSel.value||null}); }
+        catch(e2) { toast('ບໍ່ສາມາດບັນທຶກແຫຼ່ງທີ່ມາ: ' + e2.message, false); }
+      }
+      if (img_url) {
+        try { await api('df_stock_set_img_url', {p_token: S.token, p_id: id, p_img_url: img_url}); }
+        catch(e2) { toast('ບໍ່ສາມາດບັນທຶກຮູບ: ' + e2.message, false); }
+      }
+    }
+    closeStockItem(); toast('ບັນທຶກແລ້ວ'); loadStock();
+  } catch (e) { toast(e.message, false); }
+}
+
+/* ──────────── Stock image helpers ──────────── */
+function prevStockImg(inp) {
+  const wrap = $('si-img-preview-wrap');
+  if (!wrap) return;
+  if (!inp.files || !inp.files[0]) { wrap.innerHTML = ''; return; }
+  const url = URL.createObjectURL(inp.files[0]);
+  wrap.innerHTML = `<div style="text-align:center;margin-bottom:8px">
+    <img src="${url}" style="width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid var(--line)">
+  </div>`;
+}
+
+async function uploadStockImage(file) {
+  if (file.size > 5 * 1024 * 1024) throw new Error('ໄຟລ໌ໃຫຍ່ເກີນ 5 MB');
+  const ext   = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const fname = Date.now() + '_' + Math.random().toString(36).slice(2,8) + '.' + ext;
+  const res   = await fetch(`${SB_URL}/storage/v1/object/stock-images/${fname}`, {
+    method: 'POST',
+    headers: { apikey: SB_KEY, 'Content-Type': file.type || 'image/jpeg' },
+    body: file
+  });
+  if (!res.ok) { const t = await res.text(); throw new Error(t); }
+  return `${SB_URL}/storage/v1/object/public/stock-images/${fname}`;
+}
+
+/* ──────────── Stock history (by date) ──────────── */
+async function loadStockHistory() {
+  const wrap = $('stk-hist-wrap'); if (!wrap) return;
+  wrap.innerHTML = '<div class="loading-wrap" style="min-height:80px"><div class="spin"></div></div>';
+  try {
+    const r = await api('df_stock_moves_by_date', {p_token: S.token, p_date: S.stkDate});
+    if (!r.ok) { wrap.innerHTML = `<div class="banner err">${esc(r.error)}</div>`; return; }
+    const moves = r.moves || [];
+    if (!moves.length) {
+      wrap.innerHTML = '<div style="text-align:center;padding:28px;color:var(--text3)">ບໍ່ມີຂໍ້ມູນໃນວັນນີ້</div>';
+      return;
+    }
+    const kLabel = {in:'ຮັບເຂົ້າ', out:'ເບີກອອກ', count:'ນັບສະຕັອກ'};
+    const kColor = {in:'#22A06B', out:'#E03E3E', count:'#8E6FD8'};
+    const kDim   = {in:'rgba(34,160,107,.12)', out:'rgba(224,62,62,.12)', count:'rgba(142,111,216,.12)'};
+    const groups = {in:[], out:[], count:[]};
+    moves.forEach(m => { const k = m.kind || 'out'; if (groups[k]) groups[k].push(m); });
+    let html = '';
+    ['in','out','count'].forEach(k => {
+      if (!groups[k].length) return;
+      html += `<div class="hist-mv-grp">
+        <div class="hist-kind-badge" style="background:${kDim[k]};color:${kColor[k]}">
+          <span class="hpip" style="background:${kColor[k]}"></span>${kLabel[k]} · ${groups[k].length}
+        </div>`;
+      groups[k].forEach(m => {
+        const sign = k==='out' ? '−' : (k==='in' ? '+' : '');
+        html += `<div class="hist-mv-card">
+          <div style="flex:1;min-width:0">
+            <div class="hist-mv-name">${esc(m.item)}</div>
+            <div class="hist-mv-meta">${esc(m.who||'-')} · ${esc(m.at||'')}${m.note?' · '+esc(m.note):''}</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0">
+            <div class="hist-mv-qty" style="color:${kColor[k]}">${sign}${Number(m.qty).toLocaleString()}</div>
+            <div class="hist-mv-after">→ ${Number(m.after).toLocaleString()}</div>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    });
+    wrap.innerHTML = html;
+  } catch (e) {
+    const msg = e.message || '';
+    if (msg.includes('df_stock_moves_by_date') || msg.includes('PGRST202')) {
+      wrap.innerHTML = `<div style="padding:16px;background:#FFF8E7;border-left:3px solid #F6BE52;border-radius:8px;font-size:13px;color:#92600A">
+        ⚠️ ຟັງຊັນ <b>df_stock_moves_by_date</b> ຍັງບໍ່ໄດ້ຕິດຕັ້ງ<br>
+        <span style="color:var(--text3);font-size:12px">ກະລຸນາຕິດຕໍ່ຜູ້ດູແລລະບົບ ເພື່ອ run SQL ຕິດຕັ້ງ</span></div>`;
+    } else {
+      wrap.innerHTML = `<div class="banner err">${esc(msg)}</div>`;
+    }
+  }
+}
+
+/* ──────────── Stock history (by month) ──────────── */
+async function loadStockHistoryMonth() {
+  const wrap = $('stk-hist-wrap'); if (!wrap) return;
+  wrap.innerHTML = '<div class="loading-wrap" style="min-height:80px"><div class="spin"></div></div>';
+  try {
+    const r = await api('df_stock_moves_by_month', {p_token: S.token, p_month: S.stkMonth});
+    if (!r.ok) { wrap.innerHTML = `<div class="banner err">${esc(r.error)}</div>`; return; }
+    const items = r.items || [];
+    if (!items.length) {
+      wrap.innerHTML = '<div style="text-align:center;padding:28px;color:var(--text3)">ບໍ່ມີຂໍ້ມູນໃນເດືອນນີ້</div>';
+      return;
+    }
+    const maxBar = Math.max(...items.map(x => Math.max(Number(x.in_qty), Number(x.out_qty))), 1);
+    let html = `<div style="font-size:12px;color:var(--text3);margin-bottom:12px">${items.length} ລາຍການ</div>`;
+    items.forEach(it => {
+      const inn  = Number(it.in_qty);
+      const out  = Number(it.out_qty);
+      const inW  = Math.round(inn / maxBar * 100);
+      const outW = Math.round(out / maxBar * 100);
+      html += `<div class="hist-item-card">
+        <div class="hist-item-top">
+          <div class="hist-item-name">${esc(it.name)}</div>
+          <div class="hist-item-chips">
+            <span class="hist-chip" style="background:rgba(34,160,107,.12);color:#22A06B">+${inn.toLocaleString()}</span>
+            <span class="hist-chip" style="background:rgba(224,62,62,.12);color:#E03E3E">−${out.toLocaleString()}</span>
+          </div>
+        </div>
+        <div class="hist-dual-bar">
+          <div class="hist-bar-row"><span class="hist-bar-lbl">ຮັບ</span>
+            <div class="hist-bar-track"><div class="hist-bar-fill" style="width:${inW}%;background:#22A06B"></div></div>
+          </div>
+          <div class="hist-bar-row"><span class="hist-bar-lbl">ໃຊ້</span>
+            <div class="hist-bar-track"><div class="hist-bar-fill" style="width:${outW}%;background:#E03E3E"></div></div>
+          </div>
+        </div>
+      </div>`;
+    });
+    wrap.innerHTML = html;
+  } catch (e) {
+    const msg = e.message || '';
+    if (msg.includes('df_stock_moves_by_month') || msg.includes('PGRST202')) {
+      wrap.innerHTML = `<div style="padding:16px;background:#FFF8E7;border-left:3px solid #F6BE52;border-radius:8px;font-size:13px;color:#92600A">
+        ⚠️ ຟັງຊັນ <b>df_stock_moves_by_month</b> ຍັງບໍ່ໄດ້ຕິດຕັ້ງ<br>
+        <span style="color:var(--text3);font-size:12px">ກະລຸນາ run SQL ໃນ Supabase ຕາມຂັ້ນຕອນດ້ານລ່າງ</span></div>`;
+    } else {
+      wrap.innerHTML = `<div class="banner err">${esc(msg)}</div>`;
+    }
+  }
+}
+
+/* ============================================================
+   ໜ້າຈັດການ (ຜູ້ຈັດການ)
+   ============================================================ */
+let mgTab = 'staff';
+async function loadManage() {
+  $('page').innerHTML = `<div class="loading-wrap"><div class="spin"></div><span>ກຳລັງໂຫຼດ...</span></div>`;
+  try {
+    const [st, sv] = await Promise.all([
+      api('df_staff_all', {p_token: S.token}),
+      api('df_service_all', {p_token: S.token})]);
+    S.cache.staff = st.rows || []; S.cache.svc = sv.rows || [];
+    drawManage();
+  } catch (e) { $('page').innerHTML = `<div class="banner err">${esc(e.message)}</div>`; }
+}
+function setMgTab(t){ mgTab=t; drawManage(); }
+
+function drawManage() {
+  $('page').innerHTML = `
+    <div class="seg">
+      <button class="seg-btn ${mgTab==='staff'?'on':''}" onclick="setMgTab('staff')">ພະນັກງານ</button>
+      <button class="seg-btn ${mgTab==='svc'?'on':''}" onclick="setMgTab('svc')">ລາຍການ &amp; ລາຄາ</button>
+    </div>
+    <div id="mg"></div>`;
+  mgTab === 'staff' ? drawStaff() : drawSvc();
+}
+
+const ROLE_LABEL = {staff:'ພະນັກງານ', viewer:'ຜູ້ບໍລິຫານ', manager:'ຜູ້ຈັດການ'};
+function dutyText(s) {
+  const d = [];
+  if (s.doctor) d.push('ໝໍ');
+  if (s.nurse)  d.push('ພະຍາບານ');
+  if (s.spa)    d.push('ສະປາ');
+  if (s.stock)  d.push('ສາງຢາ');
+  if (!d.length) d.push(ROLE_LABEL[s.role] || '—');
+  return d.join(' + ');
+}
+
+function drawStaff() {
+  const rows = S.cache.staff;
+  const grp = (t,f) => { const l = rows.filter(f); return !l.length ? '' :
+    `<div class="mbox"><div class="mhdr"><span>${t}</span><span>${l.length} ຄົນ</span></div>
+     ${l.map(s=>`<div class="mrow">
+       <div style="flex:1;min-width:0">
+         <div style="font-weight:400">${esc(s.name)}
+           ${s.role==='manager'?'<span class="badge">ຜູ້ຈັດການ</span>':(s.role==='viewer'?'<span class="badge">ຜູ້ຖືຮຸ້ນ</span>':'')}</div>
+         <div style="font-size:12px;color:var(--muted)">
+           ${[s.doctor&&'ໝໍ',s.nurse&&'ພະຍາບານ',s.spa&&'ສະປາ',s.stock&&'ສາງຢາ'].filter(Boolean).join(' + ')||'—'}
+           ${s.temp_pin?` · PIN ຊົ່ວຄາວ <b class="serif" style="color:var(--brass);font-size:15px">${esc(s.temp_pin)}</b>`:''}</div>
+       </div>
+       <div style="display:flex;gap:6px;align-items:center">
+         <button class="pill" onclick="openEditStaff('${s.id}')" aria-label="ແກ້ໄຂ">${IC.edit}</button>
+         <button class="pill" onclick="resetPin('${s.id}','${esc(s.name)}')" aria-label="ອອກ PIN ໃໝ່">${IC.key}</button>
+         <button class="pill ${s.active?'on':'off'}" onclick="toggleStaff('${s.id}',${!s.active})">
+           ${s.active?'ໃຊ້ງານ':'ປິດ'}</button>
+       </div></div>`).join('')}</div>`; };
+
+  $('mg').innerHTML = `
+    <button class="btn-p" style="margin-bottom:18px" onclick="openAddStaff()">
+      ${IC.plus} ເພີ່ມພະນັກງານໃໝ່</button>
+    ${grp('ໝໍ', s=>s.active&&s.doctor)}
+    ${grp('ພະຍາບານ ແລະ ສະປາ', s=>s.active&&!s.doctor&&(s.nurse||s.spa))}
+    ${grp('ສາງຢາ', s=>s.active&&s.stock&&!s.doctor&&!s.nurse&&!s.spa)}
+    ${grp('ຜູ້ຈັດການ', s=>s.active&&s.role==='manager'&&!s.doctor&&!s.nurse&&!s.spa&&!s.stock)}
+    ${grp('ຜູ້ຖືຮຸ້ນ', s=>s.active&&s.role==='viewer')}
+    ${grp('ປິດການໃຊ້ງານ', s=>!s.active)}`;
+}
+
+function openAddStaff() {
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='addOv';
+  ov.onclick = e => { if (e.target===ov) closeAdd(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>ເພີ່ມພະນັກງານໃໝ່</h3>
+    <div class="field"><label class="lbl">ຊື່ *</label><input id="ns-name" placeholder="ຊື່ພະນັກງານ"></div>
+    <div class="field"><label class="lbl">ເບີໂທ</label><input id="ns-phone" inputmode="numeric" placeholder="ບໍ່ບັງຄັບ"></div>
+    <div class="field"><label class="lbl">ໜ້າທີ່ (ເລືອກໄດ້ຫຼາຍ)</label>
+      <div class="duty">
+        <label class="chk"><input type="checkbox" id="ns-d"> ໝໍ</label>
+        <label class="chk"><input type="checkbox" id="ns-n"> ພະຍາບານ</label>
+        <label class="chk"><input type="checkbox" id="ns-s"> ສະປາ</label>
+        <label class="chk"><input type="checkbox" id="ns-k"> ສາງຢາ</label>
+      </div></div>
+    <div class="field"><label class="lbl">ສິດການໃຊ້ງານ</label>
+      <select id="ns-role">
+        <option value="staff">ພະນັກງານ — ເຫັນສະເພາະຂອງຕົນເອງ</option>
+        <option value="viewer">ຜູ້ບໍລິຫານ — ເບິ່ງລາຍງານ ແລະ ສະຕັອກ ຢ່າງດຽວ</option>
+        <option value="manager">ຜູ້ຈັດການ — ຈັດການໄດ້ທັງໝົດ</option>
+      </select></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-o" style="flex:1" onclick="closeAdd()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="addStaff()">ເພີ່ມ</button>
+    </div></div>`;
+  document.body.appendChild(ov);
+  setTimeout(()=>{ const n=$('ns-name'); if(n) n.focus(); }, 100);
+}
+
+function openEditStaff(id) {
+  const s = (S.cache.staff||[]).find(x=>x.id===id); if (!s) return;
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='addOv';
+  ov.onclick = e => { if (e.target===ov) closeAdd(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>ແກ້ໄຂ ${esc(s.name)}</h3>
+    <div class="field"><label class="lbl">ເບີໂທ</label>
+      <input id="es-phone" inputmode="numeric" value="${esc(s.phone||'')}" placeholder="ບໍ່ບັງຄັບ"></div>
+    <div class="field"><label class="lbl">ໜ້າທີ່ (ເລືອກໄດ້ຫຼາຍ)</label>
+      <div class="duty">
+        <label class="chk"><input type="checkbox" id="es-d" ${s.doctor?'checked':''}> ໝໍ</label>
+        <label class="chk"><input type="checkbox" id="es-n" ${s.nurse?'checked':''}> ພະຍາບານ</label>
+        <label class="chk"><input type="checkbox" id="es-s" ${s.spa?'checked':''}> ສະປາ</label>
+        <label class="chk"><input type="checkbox" id="es-k" ${s.stock?'checked':''}> ສາງຢາ</label>
+      </div></div>
+    <div class="field"><label class="lbl">ສິດການໃຊ້ງານ</label>
+      <select id="es-role">
+        <option value="staff"   ${s.role==='staff'?'selected':''}>ພະນັກງານ — ເຫັນສະເພາະຂອງຕົນເອງ</option>
+        <option value="viewer"  ${s.role==='viewer'?'selected':''}>ຜູ້ບໍລິຫານ — ເບິ່ງຢ່າງດຽວ</option>
+        <option value="manager" ${s.role==='manager'?'selected':''}>ຜູ້ຈັດການ — ຈັດການໄດ້ທັງໝົດ</option>
+      </select></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-o" style="flex:1" onclick="closeAdd()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="saveEditStaff('${s.id}')">ບັນທຶກ</button>
+    </div></div>`;
+  document.body.appendChild(ov);
+}
+
+async function saveEditStaff(id) {
+  const s = (S.cache.staff||[]).find(x=>x.id===id); if (!s) return;
+  try {
+    const r = await api('df_staff_update', {p_token: S.token, p_id: id,
+      p_phone: $('es-phone').value,
+      p_doctor: $('es-d').checked, p_nurse: $('es-n').checked,
+      p_spa: $('es-s').checked, p_stock: $('es-k').checked,
+      p_active: s.active, p_role: $('es-role').value});
+    if (!r.ok) return toast(r.error, false);
+    closeAdd(); toast('ບັນທຶກແລ້ວ'); loadManage();
+  } catch (e) { toast(e.message, false); }
+}
+
+function closeAdd(){ const o=$('addOv'); if(o) o.remove(); }
+async function addStaff() {
+  try {
+    const r = await api('df_staff_add', {p_token: S.token,
+      p_name: $('ns-name').value, p_phone: $('ns-phone').value,
+      p_doctor: $('ns-d').checked, p_nurse: $('ns-n').checked, p_spa: $('ns-s').checked,
+      p_stock: $('ns-k').checked, p_role: $('ns-role').value});
+    if (!r.ok) return toast(r.error, false);
+    closeAdd();
+    alert('ເພີ່ມແລ້ວ\n\nPIN ຊົ່ວຄາວ: ' + r.temp_pin + '\n\nບອກໃຫ້ພະນັກງານ ແລ້ວລາວຈະຕັ້ງ PIN ໃໝ່ເອງ');
+    loadManage();
+  } catch (e) { toast(e.message, false); }
+}
+async function toggleStaff(id, active) {
+  const s = S.cache.staff.find(x=>x.id===id);
+  if (!active && !confirm(`ປິດການໃຊ້ງານ ${s.name}?\nຂໍ້ມູນເກົ່າຈະຍັງຢູ່ຄົບ`)) return;
+  try {
+    const r = await api('df_staff_update', {p_token: S.token, p_id: id, p_phone: s.phone,
+      p_doctor: s.doctor, p_nurse: s.nurse, p_spa: s.spa,
+      p_stock: s.stock, p_active: active, p_role: s.role});
+    if (!r.ok) return toast(r.error, false);
+    toast(active?'ເປີດໃຊ້ງານແລ້ວ':'ປິດແລ້ວ'); loadManage();
+  } catch (e) { toast(e.message, false); }
+}
+async function resetPin(id, name) {
+  if (!confirm(`ອອກ PIN ໃໝ່ໃຫ້ ${name}?`)) return;
+  try {
+    const r = await api('df_staff_reset_pin', {p_token: S.token, p_id: id});
+    if (!r.ok) return toast(r.error, false);
+    alert('PIN ຊົ່ວຄາວໃໝ່: ' + r.temp_pin);
+    loadManage();
+  } catch (e) { toast(e.message, false); }
+}
+
+function drawSvc() {
+  const rows = S.cache.svc;
+  const grp = d => { const l = rows.filter(s=>s.dept===d); return `
+    <div class="mbox"><div class="mhdr"><span>${CFG[d].label}</span><span>${l.length}</span></div>
+    ${l.map(s=>`<div class="mrow">
+      <div style="flex:1;min-width:0"><div style="font-weight:400;${s.active?'':'text-decoration:line-through;color:var(--muted)'}">${esc(s.name)}</div></div>
+      <input type="number" value="${Number(s.fee)}" style="width:110px;padding:8px;font-size:14px"
+             onchange="saveSvc('${d}','${esc(s.name)}',this.value,${s.active})">
+      <button class="pill ${s.active?'on':'off'}" onclick="saveSvc('${d}','${esc(s.name)}',${Number(s.fee)},${!s.active})">
+        ${s.active?'ເປີດ':'ປິດ'}</button></div>`).join('')}</div>`; };
+
+  $('mg').innerHTML = `
+    <button class="btn-p" style="margin-bottom:18px" onclick="openAddSvc()">
+      ${IC.plus} ເພີ່ມລາຍການໃໝ່</button>
+    ${grp('doctor')}${grp('nurse')}${grp('spa')}`;
+}
+
+function openAddSvc() {
+  const ov = document.createElement('div');
+  ov.className='overlay'; ov.id='addOv';
+  ov.onclick = e => { if (e.target===ov) closeAdd(); };
+  ov.innerHTML = `<div class="sheet">
+    <div class="handle"></div>
+    <h3>ເພີ່ມລາຍການໃໝ່</h3>
+    <div class="field"><label class="lbl">ພະແນກ</label><select id="nv-dept">
+      <option value="doctor">ໝໍ</option><option value="nurse">ພະຍາບານ</option><option value="spa">ສະປາ</option>
+    </select></div>
+    <div class="field"><label class="lbl">ຊື່ລາຍການ *</label><input id="nv-name" placeholder="ເຊັ່ນ: Botox"></div>
+    <div class="field"><label class="lbl">ຄ່າມື (₭)</label><input type="number" id="nv-fee" value="0" inputmode="numeric"></div>
+    <div style="display:flex;gap:10px;margin-top:6px">
+      <button class="btn-o" style="flex:1" onclick="closeAdd()">ຍົກເລີກ</button>
+      <button class="btn-p" style="flex:2" onclick="addSvc()">ເພີ່ມ</button>
+    </div></div>`;
+  document.body.appendChild(ov);
+  setTimeout(()=>{ const n=$('nv-name'); if(n) n.focus(); }, 100);
+}
+async function saveSvc(dept, name, fee, active) {
+  try {
+    const r = await api('df_service_save', {p_token: S.token, p_dept: dept,
+      p_name: name, p_fee: Number(fee)||0, p_active: active});
+    if (!r.ok) return toast(r.error, false);
+    toast('ບັນທຶກແລ້ວ');
+    const b = await api('df_bootstrap', {p_token: S.token}); S.services = b.services;
+    loadManage();
+  } catch (e) { toast(e.message, false); }
+}
+async function addSvc() {
+  const n = $('nv-name').value.trim();
+  if (!n) return toast('ກະລຸນາໃສ່ຊື່ລາຍການ', false);
+  await saveSvc($('nv-dept').value, n, $('nv-fee').value, true);
+  closeAdd();
+}
+
+/* ============================================================
+   ກວດເວີຊັນໃໝ່
+   ============================================================ */
+var updateShown = false;
+function showUpdateBar() {
+  if (updateShown) return;
+  updateShown = true;
+  var bar = document.createElement('div');
+  bar.className = 'update-bar';
+  bar.innerHTML = '<span>ມີເວີຊັນໃໝ່ພ້ອມໃຊ້ງານ</span>'
+    + '<button onclick="doUpdate()">ອັບເດດ</button>';
+  document.body.appendChild(bar);
+}
+function doUpdate() {
+  try { if (window.caches && caches.keys) caches.keys().then(function(ks){ ks.forEach(function(k){caches.delete(k);}); }); } catch(e){}
+  location.replace(location.pathname + '?v=' + Date.now());
+}
+function checkVersion() {
+  if (updateShown || document.hidden) return;
+  fetch('version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){ if (j && j.v && j.v !== APP_VERSION) showUpdateBar(); })
+    .catch(function(){});
+}
+setTimeout(checkVersion, 8000);
+setInterval(checkVersion, 10 * 60 * 1000);
+document.addEventListener('visibilitychange', function(){ if (!document.hidden) checkVersion(); });
+
+clearTimeout(window.__boot);
+document.getElementById('root').dataset.ok = '1';
+render();
+</script>
+</body>
+</html>
