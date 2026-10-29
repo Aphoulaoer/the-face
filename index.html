@@ -470,7 +470,7 @@ const myDepts = () => ['doctor','nurse','spa'].filter(d => S.me && S.me[d]);
 const isMgr    = () => S.me && S.me.role === 'manager';
 const isViewer = () => S.me && S.me.role === 'viewer';
 const canReport= () => isMgr() || isViewer();
-const hasStock = () => S.me && (S.me.stock || isMgr() || isViewer());
+const hasStock = () => S.me && (S.me.stock || S.me.nurse || isMgr() || isViewer());
 
 function toast(msg, ok = true) {
   const el = document.createElement('div');
@@ -1523,6 +1523,12 @@ async function loadStock() {
   try {
     const r = await api('df_stock_list', {p_token: S.token});
     if (!r.ok) { $('page').innerHTML = `<div class="banner err">${esc(r.error)}</div>`; return; }
+    // ພະຍາບານ: ສາມາດຮັບເຂົ້າ + ເພີ່ມລາຍການ, ແຕ່ຫ້າມນັບສະຕັອກ
+    if (S.me && S.me.nurse && !isMgr()) {
+      r.can_in    = true;
+      r.can_edit  = true;
+      r.can_count = false;
+    }
     S.cache.stock = r;
     if (S.stkOrigin   === undefined) S.stkOrigin   = 'all';
     if (S.stkView     === undefined) S.stkView     = 'items';
